@@ -6,6 +6,6 @@ Simple particle simulation engine written in C.
 
 ```sh
 ./build.sh
-./starforge
+./bin/starforge
 ```
 
