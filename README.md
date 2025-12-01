@@ -62,6 +62,12 @@ Test binary is located in:
 
 ---
 
+## Visualization using ASCII art
+
+./bin/starforge_ascii
+
+--
+
 ## Testing Framework (Unity)
 
 This project uses the Unity unit testing framework for the C language:
