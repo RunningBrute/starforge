@@ -1,5 +1,7 @@
 # Star Forge
 
+![ASCII Rain Demo](assets/ascii_demo.png)# Star Forge
+
 Experimental particle simulation engine written in pure C.
 
 ---
