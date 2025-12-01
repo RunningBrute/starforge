@@ -66,7 +66,7 @@ Test binary is located in:
 
 ./bin/starforge_ascii
 
---
+---
 
 ## Testing Framework (Unity)
 
