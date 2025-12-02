@@ -14,9 +14,11 @@ clang src/ascii_demo.c \
       src/starforge_engine.c \
       -Iinclude -o bin/starforge_ascii
 
-echo "Building tests..."
-clang tests/test_main.c tests/test_engine.c tests/unity/unity.c \
+echo "Building engine test..."
+clang tests/test_engine.c tests/unity/unity.c \
      src/starforge_engine.c \
+     src/starforge_world.c \
+     src/starforge_particlesystem.c \
      -Iinclude -Itests/unity -o bin/tests_run
 
 echo "Running tests..."
