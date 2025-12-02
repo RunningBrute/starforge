@@ -9,6 +9,7 @@ clang src/main.c \
 
 echo "Building ASCII demo..."
 clang src/ascii_demo.c \
+      src/frontend_ascii.c \
       src/starforge_world.c \
       src/starforge_particlesystem.c \
       src/starforge_engine.c \

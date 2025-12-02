@@ -1,4 +1,5 @@
 #include "starforge_engine.h"
+#include "starforge_frontend.h"
 #include <stdlib.h>
 
 struct StarforgeEngine
@@ -85,4 +86,12 @@ const StarforgeParticle* starforge_engine_particles(
 {
     *out_count = engine->max_particles;
     return engine->global_pool;
+}
+
+void starforge_engine_render(
+    const StarforgeEngine* engine,
+    StarforgeFrontend* frontend)
+{
+    if (frontend && frontend->render)
+        frontend->render(frontend, engine);
 }

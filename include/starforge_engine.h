@@ -3,6 +3,7 @@
 
 #include "starforge_world.h"
 #include "starforge_particlesystem.h"
+#include "starforge_frontend.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -32,6 +33,11 @@ void starforge_engine_update(StarforgeEngine* engine, float dt);
 const StarforgeParticle* starforge_engine_particles(
     const StarforgeEngine* engine,
     int* out_count
+);
+
+void starforge_engine_render(
+    const StarforgeEngine* engine,
+    StarforgeFrontend* frontend
 );
 
 #ifdef __cplusplus
