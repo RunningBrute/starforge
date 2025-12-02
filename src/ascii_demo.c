@@ -2,42 +2,50 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#include "starforge_world.h"
-#include "starforge_particlesystem.h"
+#include "starforge_engine.h"
 
 #define MAX_PARTICLES 2000
+#define MAX_SYSTEMS   4
 
 #define SCREEN_WIDTH 80
 #define SCREEN_HEIGHT 24
 
 #define WORLD_X_MIN  -40.0f
 #define WORLD_X_MAX   40.0f
-#define WORLD_Y_MIN   -10.0f
+#define WORLD_Y_MIN  -10.0f
 #define WORLD_Y_MAX   50.0f
 
 static void clear_screen(void)
 {
-    /* clear and set cursor at (0,0) */
     printf("\x1b[2J\x1b[H");
 }
 
 int main(void)
 {
-    StarforgeWorldForces world;
-    starforge_world_init(&world);
-    starforge_world_set_wind(&world, 4.0f, 0.0f);
-
     static StarforgeParticle pool[MAX_PARTICLES];
 
+    StarforgeEngine* engine =
+        starforge_engine_create(pool, MAX_PARTICLES, MAX_SYSTEMS);
+
+    /* Configure global world */
+    StarforgeWorldForces* world =
+        starforge_engine_world(engine);
+
+    starforge_world_set_wind(world, 4.0f, 0.0f);
+
+    /* Create rain system inside engine */
     StarforgeParticleSystem* rain =
-        starforge_particlesystem_create(pool, MAX_PARTICLES);
+        starforge_engine_create_system(engine);
 
     const float dt = 0.05f;
 
     for (int frame = 0; frame < 400; ++frame)
     {
-        starforge_particlesystem_emit_rain(rain, WORLD_X_MIN, WORLD_X_MAX, 80);
-        starforge_particlesystem_update(rain, &world, dt);
+        starforge_particlesystem_emit_rain(
+            rain, WORLD_X_MIN, WORLD_X_MAX, 80
+        );
+
+        starforge_engine_update(engine, dt);
 
         char buffer[SCREEN_HEIGHT][SCREEN_WIDTH];
 
@@ -47,7 +55,7 @@ int main(void)
 
         int count;
         const StarforgeParticle* particles =
-            starforge_particlesystem_particles(rain, &count);
+            starforge_engine_particles(engine, &count);
 
         int alive = 0;
 
@@ -69,7 +77,6 @@ int main(void)
                 sy < 0 || sy >= SCREEN_HEIGHT)
                 continue;
 
-            /* single rain drop as a / character */
             buffer[sy][sx] = '/';
         }
 
@@ -85,9 +92,9 @@ int main(void)
         printf("Frame %d | alive particles: %d\n", frame, alive);
         fflush(stdout);
 
-        usleep(50000); /* ~20 FPS */
+        usleep(50000);
     }
 
-    starforge_particlesystem_destroy(rain);
+    starforge_engine_destroy(engine);
     return 0;
 }
