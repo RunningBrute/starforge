@@ -2,6 +2,7 @@
 
 #include "starforge_frontend_ascii.h"
 #include "starforge_engine.h"
+#include "starforge_emitter_rain.h"
 
 #define MAX_PARTICLES 2000
 #define MAX_SYSTEMS   4
@@ -20,6 +21,15 @@ int main(void)
 
     StarforgeParticleSystem* rain =
         starforge_engine_create_system(engine);
+    StarforgeEmitter rain_emitter;
+    StarforgeRainEmitterConfig cfg = {
+        .x_min = -40.0f,
+        .x_max =  40.0f,
+        .rate  =  80
+    };
+
+    starforge_emitter_rain_create(&rain_emitter, &cfg);
+    starforge_particlesystem_set_emitter(rain, &rain_emitter);
 
     StarforgeFrontend ascii;
     starforge_frontend_ascii_create(&ascii);

@@ -13,6 +13,7 @@ clang src/ascii_demo.c \
       src/starforge_world.c \
       src/starforge_particlesystem.c \
       src/starforge_engine.c \
+      src/starforge_emitter_rain.c \
       -Iinclude -o bin/starforge_ascii
 
 echo "Building engine test..."

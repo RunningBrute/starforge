@@ -1,10 +1,12 @@
 #include "starforge_particlesystem.h"
 #include <stdlib.h>
+#include "starforge_emitter.h"
 
 struct StarforgeParticleSystem
 {
     StarforgeParticle* pool;
     int max_particles;
+    StarforgeEmitter* emitter;
 };
 
 StarforgeParticleSystem* starforge_particlesystem_create(
@@ -16,6 +18,7 @@ StarforgeParticleSystem* starforge_particlesystem_create(
 
     sys->pool = pool;
     sys->max_particles = max_particles;
+    sys->emitter = NULL;
 
     for (int i = 0; i < max_particles; ++i)
         pool[i].alive = 0;
@@ -43,7 +46,7 @@ void starforge_particlesystem_emit_rain(
             p->alive = 1;
             p->type = STARFORGE_PARTICLE_RAIN;
 
-            p->x = x_min + (float)rand() / RAND_MAX * (x_max - x_min);
+            p->x = x_min + (float)rand() / (float)RAND_MAX * (x_max - x_min);
             p->y = 50.0f;
 
             p->vx = 0.0f;
@@ -69,6 +72,11 @@ void starforge_particlesystem_update(
     const StarforgeWorldForces* world,
     float dt)
 {
+    if (system->emitter && system->emitter->emit)
+    {
+        system->emitter->emit(system->emitter, system, dt);
+    }
+
     for (int i = 0; i < system->max_particles; ++i)
     {
         StarforgeParticle* p = &system->pool[i];
@@ -100,4 +108,11 @@ const StarforgeParticle* starforge_particlesystem_particles(
 {
     *out_count = system->max_particles;
     return system->pool;
+}
+
+void starforge_particlesystem_set_emitter(
+    StarforgeParticleSystem* system,
+    StarforgeEmitter* emitter)
+{
+    system->emitter = emitter;
 }

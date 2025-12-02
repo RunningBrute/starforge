@@ -3,6 +3,7 @@
 
 #include "starforge_particle.h"
 #include "starforge_world.h"
+#include "starforge_emitter.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -38,6 +39,11 @@ void starforge_particlesystem_update(
 const StarforgeParticle* starforge_particlesystem_particles(
     const StarforgeParticleSystem* system,
     int* out_count
+);
+
+void starforge_particlesystem_set_emitter(
+    StarforgeParticleSystem* system,
+    StarforgeEmitter* emitter
 );
 
 #ifdef __cplusplus
