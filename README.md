@@ -2,6 +2,9 @@
 
 Modular particle simulation engine written in pure C with pluggable emitters and frontends.
 
+![railib demo](assets/railib_demo.png)
+![railib demo](assets/ascii_demo.png)
+
 Supported features:
 - Continuous emitters (Rain)
 - Event-based emitters (Burst / Explosions)
