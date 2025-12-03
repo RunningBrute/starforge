@@ -4,6 +4,19 @@ project(starforge C)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
+include(FetchContent)
+
+set(RAYLIB_VERSION 5.5)
+
+FetchContent_Declare(
+  raylib
+  URL https://github.com/raysan5/raylib/archive/refs/tags/${RAYLIB_VERSION}.tar.gz
+  DOWNLOAD_EXTRACT_TIMESTAMP OFF
+)
+
+FetchContent_MakeAvailable(raylib)
+
+
 # ---------------------------------------
 # Core library (engine + world + systems)
 # ---------------------------------------
@@ -39,6 +52,19 @@ target_link_libraries(starforge_frontend_ascii
 )
 
 # ---------------------------------------
+# Raylib frontend
+# ---------------------------------------
+
+add_library(starforge_frontend_raylib
+    src/starforge_frontend_raylib.c
+)
+
+target_link_libraries(starforge_frontend_raylib
+    starforge_core
+    raylib
+)
+
+# ---------------------------------------
 # Main app
 # ---------------------------------------
 
@@ -51,7 +77,7 @@ target_link_libraries(starforge_core_app
 )
 
 # ---------------------------------------
-# Demo: Rain
+# ASCII rain demo
 # ---------------------------------------
 
 add_executable(starforge_demo_rain
@@ -64,7 +90,7 @@ target_link_libraries(starforge_demo_rain
 )
 
 # ---------------------------------------
-# Demo: Burst
+# ASCII burst demo
 # ---------------------------------------
 
 add_executable(starforge_demo_burst
@@ -74,6 +100,19 @@ add_executable(starforge_demo_burst
 target_link_libraries(starforge_demo_burst
     starforge_core
     starforge_frontend_ascii
+)
+
+# ---------------------------------------
+# Raylib rain demo
+# ---------------------------------------
+
+add_executable(starforge_demo_raylib_rain
+    demos/demo_raylib_rain.c
+)
+
+target_link_libraries(starforge_demo_raylib_rain
+    starforge_core
+    starforge_frontend_raylib
 )
 
 # ---------------------------------------
