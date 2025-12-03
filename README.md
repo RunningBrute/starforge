@@ -1,12 +1,16 @@
-# Star Forge
+# StarForge
 
-![ASCII Rain Demo](assets/ascii_demo.png)
+Modular particle simulation engine written in pure C with pluggable emitters and frontends.
 
-Experimental particle simulation engine written in pure C.
+Supported features:
+- Continuous emitters (Rain)
+- Event-based emitters (Burst / Explosions)
+- ASCII frontend
+- Portable build using CMake (Linux, Termux, Windows)
 
 ---
 
-## Build & Test
+## Build Status
 
 ![CI](https://github.com/RunningBrute/starforge/actions/workflows/ci.yml/badge.svg)
 
@@ -14,72 +18,57 @@ Experimental particle simulation engine written in pure C.
 
 ## Requirements
 
-To build and run Star Forge you need just:
+### Termux / Linux
+pkg install clang cmake make git
 
-- clang
-- git
-- standard shell (sh)
+### Ubuntu
+sudo apt install clang cmake make git
 
-On Termux / Linux:
-
-pkg install clang git
-
-On Ubuntu:
-
-sudo apt install clang git
+### Windows
+Visual Studio with CMake
 
 ---
 
-## Build
+## Build (CMake)
 
-Build binary:
+git clone https://github.com/RunningBrute/starforge.git
+cd starforge
 
-./build.sh
-
-The output binary will be placed in:
-
-bin/starforge
-
----
-
-## Run
-
-After building:
-
-./bin/starforge
+mkdir build 
+cd build
+cmake ..
+make
 
 ---
 
-## Unit Tests
+## Run demos
 
-Unit tests are written using the Unity testing framework for C.
+Rain demo:
+./starforge_demo_rain
 
-Tests are executed automatically as part of the build:
-
-./build.sh
-
-Test binary is located in:
-
-./bin/tests_run
+Burst / Explosion demo:
+./starforge_demo_burst
 
 ---
 
-## Visualization using ASCII art
+## Run tests
 
-./bin/starforge_ascii
+./starforge_tests
 
 ---
 
-## Testing Framework (Unity)
+## Project structure
 
-This project uses the Unity unit testing framework for the C language:
+include/        - Engine API  
+src/            - Core engine, emitters and frontends  
+demos/          - Showcase applications  
+tests/          - Unit tests (Unity)  
+build/          - CMake build output  
 
-https://github.com/ThrowTheSwitch/Unity
+---
 
-Unity source files are included in this repository under:
+## Termux support
 
-tests/unity/
-
-All rights remain with the original authors.
+StarForge builds and runs directly on Android using Termux with Clang and CMake.
 
 ---
