@@ -14,7 +14,9 @@ clang src/ascii_demo.c \
       src/starforge_particlesystem.c \
       src/starforge_engine.c \
       src/starforge_emitter_rain.c \
-      -Iinclude -o bin/starforge_ascii
+      src/starforge_emitter_burst.c \
+      -Iinclude -o bin/starforge_ascii \
+      -lm
 
 echo "Building engine test..."
 clang tests/test_engine.c tests/unity/unity.c \

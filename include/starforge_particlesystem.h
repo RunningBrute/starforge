@@ -46,6 +46,14 @@ void starforge_particlesystem_set_emitter(
     StarforgeEmitter* emitter
 );
 
+void starforge_particlesystem_emit_single(
+    StarforgeParticleSystem* system,
+    float x,
+    float y,
+    float vx,
+    float vy
+);
+
 #ifdef __cplusplus
 }
 #endif

@@ -116,3 +116,27 @@ void starforge_particlesystem_set_emitter(
 {
     system->emitter = emitter;
 }
+
+void starforge_particlesystem_emit_single(
+    StarforgeParticleSystem* system,
+    float x,
+    float y,
+    float vx,
+    float vy)
+{
+    for (int i = 0; i < system->max_particles; ++i)
+    {
+        StarforgeParticle* p = &system->pool[i];
+
+        if (!p->alive)
+        {
+            p->alive = 1;
+            p->x = x;
+            p->y = y;
+            p->vx = vx;
+            p->vy = vy;
+            p->life = 3.0f;
+            return;
+        }
+    }
+}
