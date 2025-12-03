@@ -19,10 +19,10 @@ Supported features:
 ## Requirements
 
 ### Termux / Linux
-pkg install clang cmake make git
+`pkg install clang cmake make git`
 
 ### Ubuntu
-sudo apt install clang cmake make git
+`sudo apt install clang cmake make git`
 
 ### Windows
 Visual Studio with CMake
@@ -31,39 +31,58 @@ Visual Studio with CMake
 
 ## Build (CMake)
 
+```
 git clone https://github.com/RunningBrute/starforge.git
 cd starforge
+```
 
+### Termux / Linux
+
+```
 mkdir build 
 cd build
 cmake ..
 make
+```
+
+### Windows
+
+```
+mkdir build
+cd build
+cmake -G Ninja ..
+ninja
+```
 
 ---
 
 ## Run demos
 
+```
 Rain demo:
 ./starforge_demo_rain
 
 Burst / Explosion demo:
 ./starforge_demo_burst
+```
 
 ---
 
 ## Run tests
 
+```
 ./starforge_tests
+```
 
 ---
 
 ## Project structure
 
-include/        - Engine API  
-src/            - Core engine, emitters and frontends  
-demos/          - Showcase applications  
-tests/          - Unit tests (Unity)  
-build/          - CMake build output  
+`include/`        - Engine API  
+`src/`            - Core engine, emitters and frontends  
+`demos/`          - Showcase applications  
+`tests/`         - Unit tests (Unity)  
+`build/`          - CMake build output  
 
 ---
 

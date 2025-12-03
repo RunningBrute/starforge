@@ -22,7 +22,9 @@ target_include_directories(starforge_core PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
-target_link_libraries(starforge_core m)
+if(NOT WIN32)
+    target_link_libraries(starforge_core m)
+endif()
 
 # ---------------------------------------
 # ASCII frontend

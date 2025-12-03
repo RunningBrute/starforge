@@ -1,4 +1,8 @@
-#include <unistd.h>
+#ifdef _WIN32
+    #include <windows.h>
+#else
+    #include <unistd.h>
+#endif
 
 #include "starforge_engine.h"
 #include "starforge_frontend_ascii.h"
@@ -57,7 +61,11 @@ int main(void)
         starforge_engine_update(engine, dt);
         starforge_engine_render(engine, &ascii);
 
-        usleep(50000);
+        #ifdef _WIN32
+            Sleep(50);       // milliseconds
+        #else
+            usleep(50000);  // microseconds
+        #endif
     }
 
     ascii.shutdown(&ascii);
