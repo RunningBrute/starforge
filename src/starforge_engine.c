@@ -1,4 +1,5 @@
 #include "starforge_engine.h"
+#include "starforge_backend.h"
 #include "starforge_frontend.h"
 #include <stdlib.h>
 
@@ -12,6 +13,8 @@ struct StarforgeEngine
     StarforgeParticleSystem** systems;
     int max_systems;
     int system_count;
+
+    StarforgeBackend* backend;
 };
 
 StarforgeEngine* starforge_engine_create(
