@@ -1,13 +1,8 @@
-#include "starforge_particlesystem.h"
 #include <stdlib.h>
+#include "starforge_particlesystem.h"
 #include "starforge_emitter.h"
-
-struct StarforgeParticleSystem
-{
-    StarforgeParticle* pool;
-    int max_particles;
-    StarforgeEmitter* emitter;
-};
+#include "starforge_backend.h"
+#include "starforge_backend_aos.h"
 
 StarforgeParticleSystem* starforge_particlesystem_create(
     StarforgeParticle* pool,
@@ -19,6 +14,7 @@ StarforgeParticleSystem* starforge_particlesystem_create(
     sys->pool = pool;
     sys->max_particles = max_particles;
     sys->emitter = NULL;
+    sys->backend = starforge_backend_aos_create(sys);
 
     for (int i = 0; i < max_particles; ++i)
         pool[i].alive = 0;
@@ -106,8 +102,11 @@ const StarforgeParticle* starforge_particlesystem_particles(
     const StarforgeParticleSystem* system,
     int* out_count)
 {
-    *out_count = system->max_particles;
-    return system->pool;
+    StarforgeParticleView view =
+        system->backend->view(system->backend);
+
+    *out_count = view.count;
+    return view.particles;
 }
 
 void starforge_particlesystem_set_emitter(
@@ -124,9 +123,12 @@ void starforge_particlesystem_emit_single(
     float vx,
     float vy)
 {
-    for (int i = 0; i < system->max_particles; ++i)
+    StarforgeParticleView view =
+            system->backend->view(system->backend);
+
+    for (int i = 0; i < view.count; ++i)
     {
-        StarforgeParticle* p = &system->pool[i];
+        StarforgeParticle* p = &view.particles[i];
 
         if (!p->alive)
         {

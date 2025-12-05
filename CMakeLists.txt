@@ -36,6 +36,8 @@ add_library(starforge_core
     src/starforge_world.c
     src/starforge_particlesystem.c
 
+    src/starforge_backend_aos.c
+
     src/starforge_emitter_rain.c
     src/starforge_emitter_burst.c
 )

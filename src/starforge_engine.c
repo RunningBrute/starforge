@@ -1,4 +1,5 @@
 #include "starforge_engine.h"
+#include "starforge_particlesystem.h"
 #include "starforge_backend.h"
 #include "starforge_frontend.h"
 #include <stdlib.h>
@@ -13,8 +14,6 @@ struct StarforgeEngine
     StarforgeParticleSystem** systems;
     int max_systems;
     int system_count;
-
-    StarforgeBackend* backend;
 };
 
 StarforgeEngine* starforge_engine_create(
@@ -75,8 +74,9 @@ void starforge_engine_update(StarforgeEngine* engine, float dt)
 {
     for (int i = 0; i < engine->system_count; ++i)
     {
+        StarforgeParticleSystem* system = engine->systems[i];
         starforge_particlesystem_update(
-            engine->systems[i],
+            system,
             &engine->world,
             dt
         );
@@ -87,8 +87,13 @@ const StarforgeParticle* starforge_engine_particles(
     const StarforgeEngine* engine,
     int* out_count)
 {
-    *out_count = engine->max_particles;
-    return engine->global_pool;
+    StarforgeParticleSystem* system = engine->systems[0];
+
+    StarforgeParticleView view =
+        system->backend->view(system->backend);
+
+    *out_count = view.count;
+    return view.particles;
 }
 
 void starforge_engine_render(

@@ -1,6 +1,9 @@
 #ifndef STARFORGE_BACKEND_H
 #define STARFORGE_BACKEND_H
 
+#include "starforge_backend.h"
+#include "starforge_particle.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -15,11 +18,10 @@ typedef struct
 
 struct StarforgeBackend
 {
-    void (*update)(StarforgeBackend* self,
-                   float dt,
-                   const StarforgeWorldForces* world);
-
     StarforgeParticleView (*view)(StarforgeBackend* self);
+
+    void (*spawn)(StarforgeBackend* self,
+                  const StarforgeParticle* proto);
 
     void (*destroy)(StarforgeBackend* self);
 

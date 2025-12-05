@@ -63,8 +63,8 @@ void starforge_emitter_burst_create(
     data->cfg = *config;
     data->pending = 0;
 
-    out_emitter->emit     = burst_emit;
-    out_emitter->enabled  = 1;
+    out_emitter->emit    = burst_emit;
+    out_emitter->enabled = 1;
     out_emitter->context = data;
 }
 

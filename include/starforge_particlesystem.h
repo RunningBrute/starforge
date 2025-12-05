@@ -4,12 +4,19 @@
 #include "starforge_particle.h"
 #include "starforge_world.h"
 #include "starforge_emitter.h"
+#include "starforge_backend.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-typedef struct StarforgeParticleSystem StarforgeParticleSystem;
+typedef struct StarforgeParticleSystem
+{
+    StarforgeParticle* pool;
+    int max_particles;
+    StarforgeEmitter* emitter;
+    StarforgeBackend* backend;
+} StarforgeParticleSystem;
 
 /* Creation */
 StarforgeParticleSystem* starforge_particlesystem_create(

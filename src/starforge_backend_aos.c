@@ -1,20 +1,12 @@
-#include "starforge_backend.h"
-#include "starforge_particlesystem.h"
 #include <stdlib.h>
+#include "starforge_particlesystem.h"
+#include "starforge_backend_aos.h"
+#include "starforge_backend.h"
 
 typedef struct
 {
     StarforgeParticleSystem* system;
 } StarforgeBackendAosData;
-
-static void backend_aos_update(
-    StarforgeBackend* self,
-    float dt,
-    const StarforgeWorldForces* forces)
-{
-    StarforgeBackendAosData* d = self->userdata;
-    starforge_particlesystem_update(d->system, dt, forces);
-}
 
 static StarforgeParticleView backend_aos_view(
     StarforgeBackend* self)
@@ -32,7 +24,17 @@ static void backend_aos_spawn(
     const StarforgeParticle* proto)
 {
     StarforgeBackendAosData* d = self->userdata;
-    starforge_particlesystem_emit_proto(d->system, proto);
+    StarforgeParticleSystem* system = d->system;
+
+    for (int i = 0; i < system->max_particles; ++i)
+    {
+        if (!system->pool[i].alive)
+        {
+            system->pool[i] = *proto;
+            system->pool[i].alive = 1;
+            return;
+        }
+    }
 }
 
 static void backend_aos_destroy(StarforgeBackend* self)
@@ -51,7 +53,6 @@ StarforgeBackend* starforge_backend_aos_create(
     data->system = system;
 
     backend->userdata = data;
-    backend->update  = backend_aos_update;
     backend->view    = backend_aos_view;
     backend->spawn   = backend_aos_spawn;
     backend->destroy = backend_aos_destroy;
