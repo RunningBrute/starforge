@@ -27,14 +27,6 @@ StarforgeParticleSystem* starforge_particlesystem_create(
 /*  Destruction */
 void starforge_particlesystem_destroy(StarforgeParticleSystem* system);
 
-/* Emission control */
-void starforge_particlesystem_emit_rain(
-    StarforgeParticleSystem* system,
-    float x_min,
-    float x_max,
-    int count
-);
-
 /* Update all particles using global world forces */
 void starforge_particlesystem_update(
     StarforgeParticleSystem* system,

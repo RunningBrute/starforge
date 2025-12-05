@@ -24,7 +24,7 @@ int main(void)
     StarforgeRainEmitterConfig cfg = {
         .x_min = -50.0f,
         .x_max =  50.0f,
-        .rate  =  2
+        .rate  =  3
     };
 
     starforge_emitter_rain_create(&rain, &cfg);

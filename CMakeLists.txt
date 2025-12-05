@@ -1,13 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 project(starforge C)
 
-option(STARFORGE_BUILD_RAYLIB "Build Raylib frontend" ON)
-
-if(ANDROID)
-    message(STATUS "Android/Termux detected -> disabling Raylib frontend")
-    set(STARFORGE_BUILD_RAYLIB OFF)
-endif()
-
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
@@ -65,16 +58,14 @@ target_link_libraries(starforge_frontend_ascii
 # ---------------------------------------
 # Raylib frontend
 # ---------------------------------------
-if(STARFORGE_RAYLIB_ON)
-   add_library(starforge_frontend_raylib
-       src/starforge_frontend_raylib.c
-   )
+add_library(starforge_frontend_raylib
+    src/starforge_frontend_raylib.c
+)
 
-   target_link_libraries(starforge_frontend_raylib
-       starforge_core
-       raylib
-   )
-endif()
+target_link_libraries(starforge_frontend_raylib
+    starforge_core
+    raylib
+)
 
 # ---------------------------------------
 # Main app
@@ -117,16 +108,14 @@ target_link_libraries(starforge_demo_burst
 # ---------------------------------------
 # Raylib rain demo
 # ---------------------------------------
-if(STARFORGE_RAYLIB_ON)
-   add_executable(starforge_demo_raylib_rain
-       demos/demo_raylib_rain.c
-   )
+add_executable(starforge_demo_raylib_rain
+    demos/demo_raylib_rain.c
+)
 
-   target_link_libraries(starforge_demo_raylib_rain
-       starforge_core
-       starforge_frontend_raylib
-   )
-endif()
+target_link_libraries(starforge_demo_raylib_rain
+    starforge_core
+    starforge_frontend_raylib
+)
 
 # ---------------------------------------
 # Tests

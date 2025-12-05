@@ -1,6 +1,7 @@
 #include "unity/unity.h"
 #include "starforge_engine.h"
 #include "starforge_world.h"
+#include "starforge_emitter_rain.h"
 
 #define MAX_PARTICLES 256
 #define MAX_SYSTEMS   4
@@ -27,7 +28,16 @@ void test_engine_updates_particles(void)
 
     starforge_world_set_wind(world, 1.0f, 0.0f);
 
-    starforge_particlesystem_emit_rain(rain, -10.0f, 10.0f, 10);
+    StarforgeEmitter rain_emitter;
+    StarforgeRainEmitterConfig cfg = {
+        .x_min = -10.0f,
+        .x_max =  20.0f,
+        .rate  =  10
+    };
+
+    starforge_emitter_rain_create(&rain_emitter, &cfg);
+    starforge_particlesystem_set_emitter(rain, &rain_emitter);
+
     starforge_engine_update(engine, 0.1f);
 
     int count;
