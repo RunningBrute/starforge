@@ -37,29 +37,7 @@ void starforge_particlesystem_update(
         system->emitter->emit(system->emitter, system, dt);
     }
 
-    for (int i = 0; i < system->max_particles; ++i)
-    {
-        StarforgeParticle* p = &system->pool[i];
-        if (!p->alive)
-            continue;
-
-        /* Apply global forces */
-        p->vx += world->gravity_x * dt;
-        p->vy += world->gravity_y * dt;
-
-        p->vx += world->wind_x * dt;
-        p->vy += world->wind_y * dt;
-
-        /* Integrate */
-        p->x += p->vx * dt;
-        p->y += p->vy * dt;
-
-        /* Life decay */
-        p->life -= dt;
-
-        if (p->life <= 0.0f || p->y < -50.0f)
-            p->alive = 0;
-    }
+    system->backend->update(system->backend, dt, world);
 }
 
 const StarforgeParticle* starforge_particlesystem_particles(
