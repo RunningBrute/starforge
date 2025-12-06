@@ -24,33 +24,24 @@ static void rain_emit(
     float x_max =  data->cfg.x_max;
     int count = data->cfg.rate;
 
-    for (int i = 0; i < system->max_particles && count > 0; ++i)
+    while (system->max_particles && count > 0)
     {
-        if (!system->pool[i].alive)
-        {
-            StarforgeParticle* p = &system->pool[i];
-
-            p->alive = 1;
-            p->type = STARFORGE_PARTICLE_RAIN;
-
-            p->x = x_min + (float)rand() / (float)RAND_MAX * (x_max - x_min);
-            p->y = 50.0f;
-
-            p->vx = 0.0f;
-            p->vy = -5.0f;
-
-            p->life = 3.0f;
-            p->max_life = 3.0f;
-
-            p->size = 1.0f;
-
-            p->r = 0.4f;
-            p->g = 0.6f;
-            p->b = 1.0f;
-            p->a = 1.0f;
-
-            count--;
-        }
+        float x_proto = x_min + (float)rand() / (float)RAND_MAX * (x_max - x_min);
+        
+        StarforgeParticle proto = {
+            .alive = 1,
+            .type = STARFORGE_PARTICLE_RAIN,
+            .x = x_proto,
+            .y = 50.0f,
+            .vx = 0.0f,
+            .vy = -5.0f,
+            .life = 3.0f,
+            .max_life = 3.0f,
+            .size = 1.0f
+        };
+        
+        system->backend->spawn(system->backend, &proto);
+        count--;
     }
 }
 

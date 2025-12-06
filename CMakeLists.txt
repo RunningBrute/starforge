@@ -4,20 +4,17 @@ project(starforge C)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
+include(FetchContent)
 
-if(STARFORGE_BUILD_RAYLIB)
-   include(FetchContent)
+set(RAYLIB_VERSION 5.5)
 
-   set(RAYLIB_VERSION 5.5)
+FetchContent_Declare(
+    raylib
+    URL https://github.com/raysan5/raylib/archive/refs/tags/${RAYLIB_VERSION}.tar.gz
+    DOWNLOAD_EXTRACT_TIMESTAMP OFF
+)
 
-   FetchContent_Declare(
-     raylib
-     URL https://github.com/raysan5/raylib/archive/refs/tags/${RAYLIB_VERSION}.tar.gz
-     DOWNLOAD_EXTRACT_TIMESTAMP OFF
-   )
-
-   FetchContent_MakeAvailable(raylib)
-endif()
+FetchContent_MakeAvailable(raylib)
 
 # ---------------------------------------
 # Core library (engine + world + systems)
@@ -30,6 +27,7 @@ add_library(starforge_core
     src/starforge_particlesystem.c
 
     src/starforge_backend_aos.c
+    src/starforge_backend_soa_cpu.c
 
     src/starforge_emitter_rain.c
     src/starforge_emitter_burst.c

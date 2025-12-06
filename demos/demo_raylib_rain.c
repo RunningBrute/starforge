@@ -2,7 +2,7 @@
 #include "starforge_emitter_rain.h"
 #include "starforge_frontend_raylib.h"
 
-#define MAX_PARTICLES 500
+#define MAX_PARTICLES 100
 #define MAX_SYSTEMS   4
 
 int main(void)
