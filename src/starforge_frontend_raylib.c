@@ -19,10 +19,13 @@ static void raylib_render(
     ClearBackground(BLACK);
 
     DrawText("StarForge Raylib running", 20, 20, 20, WHITE);
+    DrawFPS(20, 50);
 
     int count;
     const StarforgeParticle* particles =
         starforge_engine_particles(engine, &count);
+
+    DrawText(TextFormat("Particles: %d", count), 20, 80, 20, GREEN);
 
     for (int i = 0; i < count; ++i)
     {

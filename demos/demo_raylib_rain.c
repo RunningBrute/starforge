@@ -2,7 +2,7 @@
 #include "starforge_emitter_rain.h"
 #include "starforge_frontend_raylib.h"
 
-#define MAX_PARTICLES 100
+#define MAX_PARTICLES 10000
 #define MAX_SYSTEMS   4
 
 int main(void)
@@ -24,7 +24,7 @@ int main(void)
     StarforgeRainEmitterConfig cfg = {
         .x_min = -50.0f,
         .x_max =  50.0f,
-        .rate  =  3
+        .rate  =  5
     };
 
     starforge_emitter_rain_create(&rain, &cfg);
