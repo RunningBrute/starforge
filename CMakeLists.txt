@@ -43,7 +43,8 @@ if(NOT WIN32)
 endif()
 
 if (MSVC)
-    target_compile_options(starforge_core PRIVATE /arch:AVX2)
+    target_compile_options(starforge_core PRIVATE
+        $<$<CONFIG:Release>:/O2 /arch:AVX2 /fp:fast>)
 else()
     target_compile_options(starforge_core PRIVATE -mavx2 -mfma)
 endif()

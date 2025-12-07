@@ -31,11 +31,11 @@ static void backend_soa_avx2_update(
         if (_mm256_movemask_ps(mask) == 0)
             continue;
 
-        __m256 vx = _mm256_load_ps(&p->vx[i]);
-        __m256 vy = _mm256_load_ps(&p->vy[i]);
-        __m256 x  = _mm256_load_ps(&p->x[i]);
-        __m256 y  = _mm256_load_ps(&p->y[i]);
-        __m256 life = _mm256_load_ps(&p->life[i]);
+        __m256 vx = _mm256_loadu_ps(&p->vx[i]);
+        __m256 vy = _mm256_loadu_ps(&p->vy[i]);
+        __m256 x  = _mm256_loadu_ps(&p->x[i]);
+        __m256 y  = _mm256_loadu_ps(&p->y[i]);
+        __m256 life = _mm256_loadu_ps(&p->life[i]);
 
         vx = _mm256_add_ps(vx, _mm256_mul_ps(gxv, dtv));
         vy = _mm256_add_ps(vy, _mm256_mul_ps(gyv, dtv));
@@ -47,11 +47,11 @@ static void backend_soa_avx2_update(
 
         life = _mm256_sub_ps(life, dtv);
 
-        _mm256_store_ps(&p->vx[i], vx);
-        _mm256_store_ps(&p->vy[i], vy);
-        _mm256_store_ps(&p->x[i],  x);
-        _mm256_store_ps(&p->y[i],  y);
-        _mm256_store_ps(&p->life[i], life);
+        _mm256_storeu_ps(&p->vx[i], vx);
+        _mm256_storeu_ps(&p->vy[i], vy);
+        _mm256_storeu_ps(&p->x[i],  x);
+        _mm256_storeu_ps(&p->y[i],  y);
+        _mm256_storeu_ps(&p->life[i], life);
     }
 
     for (; i < n; ++i)
@@ -65,6 +65,7 @@ static void backend_soa_avx2_update(
         p->x[i]  += p->vx[i] * dt;
         p->y[i]  += p->vy[i] * dt;
         p->life[i] -= dt;
+        p->alive[i] = 1;
 
         if (p->life[i] <= 0.0f || p->y[i] < -50.0f)
             p->alive[i] = 0;
@@ -74,7 +75,7 @@ static void backend_soa_avx2_update(
 StarforgeBackend* starforge_backend_soa_avx2_create(
     StarforgeParticleSystem* system)
 {
-    StarforgeBackend* backend = starforge_backend_soa_create(system);
+    StarforgeBackend* backend = starforge_backend_soa_cpu_create(system);
     backend->update = backend_soa_avx2_update;
     return backend;
 }

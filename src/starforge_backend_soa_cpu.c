@@ -102,7 +102,7 @@ static void backend_soa_destroy(StarforgeBackend* self)
     free(self);
 }
 
-StarforgeBackend* starforge_backend_soa_create(
+StarforgeBackend* starforge_backend_soa_cpu_create(
     StarforgeParticleSystem* system)
 {
     StarforgeBackend* backend = malloc(sizeof(StarforgeBackend));
