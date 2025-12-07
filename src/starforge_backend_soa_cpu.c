@@ -1,21 +1,7 @@
 #include <stdlib.h>
 #include "starforge_particlesystem.h"
-#include "starforge_backend_soa.h"
+#include "starforge_backend_soa_cpu.h"
 #include "starforge_backend.h"
-
-typedef struct {
-    float* x;
-    float* y;
-    float* vx;
-    float* vy;
-    float* life;
-    float* max_life;
-    StarforgeParticleType* type;
-    int* alive;
-
-    StarforgeParticle* view_buffer;
-    int max_particles;
-} StarforgeBackendSoAData;
 
 static void backend_soa_update(
     StarforgeBackend* self,

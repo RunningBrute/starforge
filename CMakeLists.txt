@@ -27,7 +27,8 @@ add_library(starforge_core
     src/starforge_particlesystem.c
 
     src/starforge_backend_aos.c
-    src/starforge_backend_soa.c
+    src/starforge_backend_soa_cpu.c
+    src/starforge_backend_soa_avx2.c
 
     src/starforge_emitter_rain.c
     src/starforge_emitter_burst.c
@@ -39,6 +40,12 @@ target_include_directories(starforge_core PUBLIC
 
 if(NOT WIN32)
     target_link_libraries(starforge_core m)
+endif()
+
+if (MSVC)
+    target_compile_options(starforge_core PRIVATE /arch:AVX2)
+else()
+    target_compile_options(starforge_core PRIVATE -mavx2 -mfma)
 endif()
 
 # ---------------------------------------
