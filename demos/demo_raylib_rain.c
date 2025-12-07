@@ -15,7 +15,7 @@ int main(void)
     StarforgeWorldForces* world =
         starforge_engine_world(engine);
 
-    starforge_world_set_wind(world, 2.0f, 1.0f);
+    starforge_world_set_wind(world, 0.1f, 0.2f);
 
     StarforgeParticleSystem* system =
         starforge_engine_create_system(engine);

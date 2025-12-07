@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include "starforge_particlesystem.h"
-#include "starforge_backend_soa_cpu.h"
+#include "starforge_backend_soa.h"
 #include "starforge_backend.h"
 
 typedef struct {

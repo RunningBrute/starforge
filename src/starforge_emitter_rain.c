@@ -35,7 +35,7 @@ static void rain_emit(
             .y = 50.0f,
             .vx = 0.0f,
             .vy = -5.0f,
-            .life = 3.0f,
+            .life = 5.0f,
             .max_life = 3.0f,
             .size = 1.0f
         };

@@ -3,7 +3,7 @@
 #include "starforge_emitter.h"
 #include "starforge_backend.h"
 #include "starforge_backend_aos.h"
-#include "starforge_backend_soa_cpu.h"
+#include "starforge_backend_soa.h"
 
 StarforgeParticleSystem* starforge_particlesystem_create(
     StarforgeParticle* pool,
@@ -15,8 +15,8 @@ StarforgeParticleSystem* starforge_particlesystem_create(
     sys->pool = pool;
     sys->max_particles = max_particles;
     sys->emitter = NULL;
-    //sys->backend = starforge_backend_aos_create(sys);
-    sys->backend = starforge_backend_soa_create(sys);
+    sys->backend = starforge_backend_aos_create(sys);
+    //sys->backend = starforge_backend_soa_create(sys);
 
     for (int i = 0; i < max_particles; ++i)
         pool[i].alive = 0;

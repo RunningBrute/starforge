@@ -27,7 +27,7 @@ add_library(starforge_core
     src/starforge_particlesystem.c
 
     src/starforge_backend_aos.c
-    src/starforge_backend_soa_cpu.c
+    src/starforge_backend_soa.c
 
     src/starforge_emitter_rain.c
     src/starforge_emitter_burst.c
