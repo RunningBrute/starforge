@@ -45,10 +45,16 @@ static StarforgeParticleView backend_aos_view(
     StarforgeBackend* self)
 {
     StarforgeBackendAosData* d = self->userdata;
+    StarforgeParticleSystem* s = d->system;
+
+    int count = 0;
+    for (int i = 0; i < s->max_particles; i++)
+        if (s->pool[i].alive)
+            count++;
 
     StarforgeParticleView v;
-    v.particles = d->system->pool;
-    v.count     = d->system->max_particles;
+    v.particles = s->pool;
+    v.count = count;
     return v;
 }
 
