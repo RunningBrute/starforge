@@ -70,6 +70,14 @@ static void backend_soa_avx2_update(
         if (p->life[i] <= 0.0f || p->y[i] < -50.0f)
             p->alive[i] = 0;
     }
+
+    for (int j = 0; j < p->max_particles; ++j)
+    {
+        if (!p->alive[j]) continue;
+
+        if (p->life[j] <= 0.0f || p->y[j] < -50.0f)
+            p->alive[j] = 0;
+    }
 }
 
 StarforgeBackend* starforge_backend_soa_avx2_create(
