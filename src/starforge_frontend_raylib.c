@@ -1,6 +1,7 @@
 #include "starforge_frontend_raylib.h"
 #include "starforge_engine.h"
 #include "raylib.h"
+#include "rlgl.h"
 
 static void raylib_init(StarforgeFrontend* self)
 {
@@ -27,15 +28,20 @@ static void raylib_render(
 
     DrawText(TextFormat("Particles: %d", count), 20, 80, 20, GREEN);
 
+    const int screenWidth  = 1000;
+    const int screenHeight = 700;
+    const float size = 2.0f;
+
     for (int i = 0; i < count; ++i)
     {
-        int screenWidth  = 1000;
-        int screenHeight = 700;
-
         int x = (int)(particles[i].x * 8.0f + screenWidth / 2);
         int y = (int)(screenHeight - (particles[i].y * 8.0f + screenHeight / 2));
 
-        DrawCircle(x, y, 2, SKYBLUE);
+        DrawRectangleV(
+            (Vector2){ x, y },
+            (Vector2){ 3, 3 },   // mały kwadrat
+            SKYBLUE
+        );
     }
 
     EndDrawing();
