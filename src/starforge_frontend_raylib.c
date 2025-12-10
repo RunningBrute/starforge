@@ -3,6 +3,27 @@
 #include "raylib.h"
 #include "rlgl.h"
 
+static Color get_particle_color(StarforgeParticleType type)
+{
+    Color color = WHITE;
+    switch (type)
+    {
+        case STARFORGE_PARTICLE_FIRE:
+            color = ORANGE;
+            break;
+
+        case STARFORGE_PARTICLE_SMOKE:
+            color = GRAY;
+            break;
+
+        default:
+            color = SKYBLUE;
+            break;
+    }
+
+    return color;
+}
+
 static void raylib_init(StarforgeFrontend* self)
 {
     (void)self;
@@ -39,8 +60,8 @@ static void raylib_render(
 
         DrawRectangleV(
             (Vector2){ x, y },
-            (Vector2){ 3, 3 },   // mały kwadrat
-            SKYBLUE
+            (Vector2){ 3, 3 },
+            get_particle_color(particles[i].type)
         );
     }
 

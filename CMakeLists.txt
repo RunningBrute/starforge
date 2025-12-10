@@ -32,6 +32,7 @@ add_library(starforge_core
 
     src/starforge_emitter_rain.c
     src/starforge_emitter_burst.c
+    src/starforge_emitter_fire.c
 )
 
 target_include_directories(starforge_core PUBLIC
@@ -119,6 +120,18 @@ add_executable(starforge_demo_raylib_rain
 )
 
 target_link_libraries(starforge_demo_raylib_rain
+    starforge_core
+    starforge_frontend_raylib
+)
+
+# ---------------------------------------
+# Raylib fire demo
+# ---------------------------------------
+add_executable(starforge_demo_raylib_fire
+    demos/demo_raylib_fire.c
+)
+
+target_link_libraries(starforge_demo_raylib_fire
     starforge_core
     starforge_frontend_raylib
 )

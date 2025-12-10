@@ -16,9 +16,9 @@ StarforgeParticleSystem* starforge_particlesystem_create(
     sys->pool = pool;
     sys->max_particles = max_particles;
     sys->emitter = NULL;
-    //sys->backend = starforge_backend_aos_create(sys);
+    sys->backend = starforge_backend_aos_create(sys);
     //sys->backend = starforge_backend_soa_cpu_create(sys);
-    sys->backend = starforge_backend_soa_avx2_create(sys);
+    //sys->backend = starforge_backend_soa_avx2_create(sys);
 
     for (int i = 0; i < max_particles; ++i)
         pool[i].alive = 0;

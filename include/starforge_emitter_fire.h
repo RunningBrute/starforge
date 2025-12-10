@@ -9,8 +9,8 @@ extern "C" {
 
 typedef struct
 {
-    float X;
-    float Y;
+    float x;
+    float y;
     int   rate;
 } StarforgeFireEmitterConfig;
 

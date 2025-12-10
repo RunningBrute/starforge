@@ -29,6 +29,11 @@ static void backend_aos_update(
         p->vx += world->wind_x * dt;
         p->vy += world->wind_y * dt;
 
+        if (p->type == STARFORGE_PARTICLE_FIRE)
+        {
+            p->vy *= 0.98f;
+        }
+
         /* Integrate */
         p->x += p->vx * dt;
         p->y += p->vy * dt;
