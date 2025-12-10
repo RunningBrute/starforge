@@ -2,14 +2,20 @@
 
 Modular particle simulation engine written in pure C with pluggable emitters and frontends.
 
-![railib demo rain](assets/fire_and_smoke.gif)
-![railib demo fire](assets/rain.gif)
+## Live Demos (Raylib Frontend)
 
+### Fire + Smoke
+![Rain demo](assets/fire_and_smoke.gif)
+
+### Rain
+![Fire and Smoke Demo](assets/rain.gif)
 
 Supported features:
+
 - Continuous emitters (Rain, Fire & Smoke)
 - Event-based emitters (Burst / Explosions)
 - ASCII frontend
+- Raylib frontend
 - Portable build using CMake (Linux, Termux, Windows)
 
 ---
