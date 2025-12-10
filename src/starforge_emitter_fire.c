@@ -2,6 +2,7 @@
 #include "starforge_particlesystem.h"
 
 #include <stdlib.h>
+#include "starforge_math.h"
 
 typedef struct
 {
@@ -31,10 +32,10 @@ static void fire_emit(
             .type = STARFORGE_PARTICLE_FIRE,
             .x = x,
             .y = y,
-            .vx = 0.0f,
-            .vy = -5.0f,
-            .life = 5.0f,
-            .max_life = 3.0f,
+            .vx = frand(-10.0f, 10.0f),
+            .vy = frand(40.0f, 80.0f),
+            .life = frand(0.4f, 0.8f),
+            .max_life = 0.8,
             .size = 1.0f
         };
 
