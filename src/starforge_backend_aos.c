@@ -2,6 +2,7 @@
 #include "starforge_particlesystem.h"
 #include "starforge_backend_aos.h"
 #include "starforge_backend.h"
+#include "starforge_math.h"
 
 typedef struct
 {
@@ -32,6 +33,20 @@ static void backend_aos_update(
         if (p->type == STARFORGE_PARTICLE_FIRE)
         {
             p->vy *= 0.98f;
+        }
+
+        if (p->type == STARFORGE_PARTICLE_FIRE && p->life <= 0.1f)
+        {
+            StarforgeParticle s;
+
+            p->vx = frand(-5.0f, 5.0f);
+            p->vy = frand(10.0f, 25.0f);
+
+            p->life     = frand(1.5f, 3.0f);
+            p->max_life = p->life;
+
+            p->type  = STARFORGE_PARTICLE_SMOKE;
+            p->alive = 1;
         }
 
         /* Integrate */

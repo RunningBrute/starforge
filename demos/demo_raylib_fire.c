@@ -2,7 +2,7 @@
 #include "starforge_emitter_fire.h"
 #include "starforge_frontend_raylib.h"
 
-#define MAX_PARTICLES 500
+#define MAX_PARTICLES 1500
 #define MAX_SYSTEMS   4
 
 int main(void)
@@ -24,7 +24,7 @@ int main(void)
     StarforgeFireEmitterConfig cfg = {
         .x = 0.0f,
         .y = -40.0f,
-        .rate  = 50
+        .rate  = 150
     };
 
     starforge_emitter_fire_create(&fire, &cfg);

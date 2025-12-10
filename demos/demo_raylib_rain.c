@@ -2,7 +2,7 @@
 #include "starforge_emitter_rain.h"
 #include "starforge_frontend_raylib.h"
 
-#define MAX_PARTICLES 100000
+#define MAX_PARTICLES 5000
 #define MAX_SYSTEMS   4
 
 int main(void)
@@ -15,7 +15,7 @@ int main(void)
     StarforgeWorldForces* world =
         starforge_engine_world(engine);
 
-    starforge_world_set_wind(world, 0.1f, 0.2f);
+    starforge_world_set_wind(world, 4.0f, 0.2f);
 
     StarforgeParticleSystem* system =
         starforge_engine_create_system(engine);
@@ -24,7 +24,7 @@ int main(void)
     StarforgeRainEmitterConfig cfg = {
         .x_min = -50.0f,
         .x_max =  50.0f,
-        .rate  =  400
+        .rate  =  4
     };
 
     starforge_emitter_rain_create(&rain, &cfg);
