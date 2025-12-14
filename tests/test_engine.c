@@ -13,7 +13,7 @@ static StarforgeParticleSystem* rain = NULL;
 void setUp(void)
 {
     engine = starforge_engine_create(pool, MAX_PARTICLES, MAX_SYSTEMS);
-    rain = starforge_engine_create_system(engine);
+    rain = starforge_engine_create_system(engine, STARFORGE_BACKEND_AOS);
 }
 
 void tearDown(void)

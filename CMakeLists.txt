@@ -1,10 +1,17 @@
 cmake_minimum_required(VERSION 3.16)
-project(starforge C)
+project(starforge C CXX)
 
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
 include(FetchContent)
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
+)
+# For Windows: Prevent overriding the parent project's compiler/linker settings
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
 
 set(RAYLIB_VERSION 5.5)
 
@@ -149,3 +156,26 @@ add_executable(starforge_tests
 target_link_libraries(starforge_tests
     starforge_core
 )
+
+# ---------------------------------------
+# # Google Benchmark
+# ---------------------------------------
+add_subdirectory(external/benchmark)
+
+add_executable(starforge_benchmark
+    benchmarks/benchmark_update.cpp
+)
+
+target_link_libraries(starforge_benchmark
+    PRIVATE
+    starforge_core
+    gtest_main
+    benchmark::benchmark
+)
+
+set_target_properties(starforge_benchmark PROPERTIES
+    CXX_STANDARD 17
+    CXX_STANDARD_REQUIRED ON
+)
+
+include(GoogleTest)

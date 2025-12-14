@@ -10,6 +10,13 @@
 extern "C" {
 #endif
 
+typedef enum
+{
+    STARFORGE_BACKEND_SOA = 0,
+    STARFORGE_BACKEND_AOS,
+    STARFORGE_BACKEND_AVX2
+} BackendType;
+
 typedef struct StarforgeParticleSystem
 {
     StarforgeParticle* pool;
@@ -21,7 +28,8 @@ typedef struct StarforgeParticleSystem
 /* Creation */
 StarforgeParticleSystem* starforge_particlesystem_create(
     StarforgeParticle* pool,
-    int max_particles
+    int max_particles,
+    BackendType backend_type
 );
 
 /*  Destruction */

@@ -30,4 +30,8 @@ typedef struct
     int alive;
 } StarforgeParticle;
 
+#ifdef __cplusplus
+}
+#endif
+
 #endif /* STARFORGE_PARTICLE_H */

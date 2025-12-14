@@ -24,7 +24,8 @@ StarforgeWorldForces* starforge_engine_world(StarforgeEngine* engine);
 
 /* Create new particle system inside engine */
 StarforgeParticleSystem* starforge_engine_create_system(
-    StarforgeEngine* engine
+    StarforgeEngine* engine,
+    BackendType backend_type
 );
 
 /* Global update of all systems */

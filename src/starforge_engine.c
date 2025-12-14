@@ -55,7 +55,8 @@ StarforgeWorldForces* starforge_engine_world(StarforgeEngine* engine)
 }
 
 StarforgeParticleSystem* starforge_engine_create_system(
-    StarforgeEngine* engine)
+    StarforgeEngine* engine,
+    BackendType backend_type)
 {
     if (engine->system_count >= engine->max_systems)
         return NULL;
@@ -63,7 +64,8 @@ StarforgeParticleSystem* starforge_engine_create_system(
     StarforgeParticleSystem* sys =
         starforge_particlesystem_create(
             engine->global_pool,
-            engine->max_particles
+            engine->max_particles,
+            backend_type
         );
 
     engine->systems[engine->system_count++] = sys;

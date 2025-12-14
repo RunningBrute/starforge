@@ -24,7 +24,7 @@ int main(void)
     starforge_world_set_wind(world, 0.0f, 0.0f);
 
     StarforgeParticleSystem* system =
-        starforge_engine_create_system(engine);
+        starforge_engine_create_system(engine, STARFORGE_BACKEND_AOS);
 
     /* Burst emitter */
     StarforgeEmitter burst;

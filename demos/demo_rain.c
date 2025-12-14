@@ -26,7 +26,7 @@ int main(void)
 
     /* Particle system */
     StarforgeParticleSystem* system =
-        starforge_engine_create_system(engine);
+        starforge_engine_create_system(engine, STARFORGE_BACKEND_AOS);
 
     /* Rain emitter */
     StarforgeEmitter rain;
