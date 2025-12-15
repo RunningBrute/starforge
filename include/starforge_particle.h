@@ -1,17 +1,11 @@
 #ifndef STARFORGE_PARTICLE_H
 #define STARFORGE_PARTICLE_H
 
+#include "starforge_particle_type.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-typedef enum
-{
-    STARFORGE_PARTICLE_RAIN = 0,
-    STARFORGE_PARTICLE_FIRE,
-    STARFORGE_PARTICLE_SMOKE,
-    STARFORGE_PARTICLE_SPARK
-} StarforgeParticleType;
 
 typedef struct
 {
