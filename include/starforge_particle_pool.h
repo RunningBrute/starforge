@@ -12,15 +12,15 @@ typedef struct StarforgeParticlePool StarforgeParticlePool;
 
 StarforgeParticlePool* starforge_particle_pool_create(int max_particles);
 
-float get_x(StarforgeParticlePool* pool);
-float get_y(StarforgeParticlePool* pool);
-float get_vx(StarforgeParticlePool* pool);
-float get_vy(StarforgeParticlePool* pool);
-float get_life(StarforgeParticlePool* pool);
-float get_max_life(StarforgeParticlePool* pool);
-float get_size(StarforgeParticlePool* pool);
-StarforgeParticleType get_type(StarforgeParticlePool* pool);
-int get_alive(StarforgeParticlePool* pool);
+float get_x(StarforgeParticlePool* pool, int index);
+float get_y(StarforgeParticlePool* pool, int index);
+float get_vx(StarforgeParticlePool* pool, int index);
+float get_vy(StarforgeParticlePool* pool, int index);
+float get_life(StarforgeParticlePool* pool, int index);
+float get_max_life(StarforgeParticlePool* pool, int index);
+float get_size(StarforgeParticlePool* pool, int index);
+StarforgeParticleType get_type(StarforgeParticlePool* pool, int index);
+int get_alive(StarforgeParticlePool* pool, int index);
 
 void starforge_particle_pool_destroy(StarforgeParticlePool* pool);
 
@@ -28,4 +28,4 @@ void starforge_particle_pool_destroy(StarforgeParticlePool* pool);
 }
 #endif
 
-#endif /* STARFORGE_PARTICLE_POOL_AOS_H */
+#endif /* STARFORGE_PARTICLE_POOL_H */
