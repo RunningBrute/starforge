@@ -1,16 +1,17 @@
 #include "starforge_particle_pool_aos.h"
 
-StarforgeParticlePoolAoS starforge_particel_pool_aos_create(int max_particles)
+StarforgeParticlePool* starforge_particel_pool_aos_create(int max_particles)
 {
-    StarforgeParticlePoolAoS pool;
+    StarforgeParticlePool* pool = (StarforgeParticlePool*)malloc(sizeof(StarforgeParticlePool));
 
-    pool.pool = (StarforgeParticle*)malloc(sizeof(StarforgeParticle));
-    pool.max_particles = max_particles;
+    pool->pool = (StarforgeParticle*)malloc(sizeof(StarforgeParticle));
+    pool->max_particles = max_particles;
     
     return pool;
 }
 
-void starforge_particel_pool_aos_destroy(StarforgeParticlePoolAoS pool)
+void starforge_particel_pool_aos_destroy(StarforgeParticlePool* pool)
 {
-    free(pool.pool);
+    free(pool->pool);
+    free(pool);
 }
