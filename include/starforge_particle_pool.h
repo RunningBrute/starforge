@@ -10,7 +10,7 @@ extern "C" {
 
 typedef struct StarforgeParticlePool StarforgeParticlePool;
 
-StarforgeParticlePool* starforge_particel_pool_create(int max_particles);
+StarforgeParticlePool* starforge_particle_pool_create(int max_particles);
 
 float get_x(StarforgeParticlePool* pool);
 float get_y(StarforgeParticlePool* pool);
@@ -22,7 +22,7 @@ float get_size(StarforgeParticlePool* pool);
 StarforgeParticleType get_type(StarforgeParticlePool* pool);
 int get_alive(StarforgeParticlePool* pool);
 
-void starforge_particel_pool_destroy(StarforgeParticlePool* pool);
+void starforge_particle_pool_destroy(StarforgeParticlePool* pool);
 
 #ifdef __cplusplus
 }
