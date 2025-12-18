@@ -9,3 +9,8 @@ StarforgeParticlePoolAoS starforge_particel_pool_aos_create(int max_particles)
     
     return pool;
 }
+
+void starforge_particel_pool_aos_destroy(StarforgeParticlePoolAoS pool)
+{
+    free(pool.pool);
+}
