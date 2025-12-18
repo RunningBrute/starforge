@@ -15,6 +15,8 @@ typedef struct
     int max_particles;
 } StarforgeParticlePoolAoS;
 
+StarforgeParticlePoolAoS starforge_particel_pool_aos_create(int max_particles);
+
 #ifdef __cplusplus
 }
 #endif
