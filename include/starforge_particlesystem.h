@@ -2,6 +2,7 @@
 #define STARFORGE_PARTICLE_SYSTEM_H
 
 #include "starforge_particle.h"
+#include "starforge_particle_pool.h"
 #include "starforge_world.h"
 #include "starforge_emitter.h"
 #include "starforge_backend.h"
@@ -19,6 +20,7 @@ typedef enum
 
 typedef struct StarforgeParticleSystem
 {
+    StarforgeParticlePool* particles_pool;
     StarforgeParticle* pool;
     int max_particles;
     StarforgeEmitter* emitter;
