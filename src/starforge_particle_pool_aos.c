@@ -1,6 +1,13 @@
 #include "starforge_particle_pool_aos.h"
 #include "starforge_particle_pool_accessor.h"
 
+typedef struct StarforgeParticlePool
+{
+    StarforgeParticle* pool;
+    StarforgeParticlePoolAccessor* accessor;
+    int max_particles;
+} StarforgeParticlePool;
+
 static float aos_get_x(StarforgeParticlePool* pool, int index)
 {
     return pool->pool[index].x;

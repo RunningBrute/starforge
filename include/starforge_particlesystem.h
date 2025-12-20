@@ -3,6 +3,7 @@
 
 #include "starforge_particle.h"
 #include "starforge_particle_pool.h"
+#include "starforge_particle_pool_accessor.h"
 #include "starforge_world.h"
 #include "starforge_emitter.h"
 #include "starforge_backend.h"

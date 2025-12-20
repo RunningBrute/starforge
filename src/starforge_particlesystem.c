@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include "starforge_particlesystem.h"
 #include "starforge_particle_pool_aos.h"
+#include "starforge_particle_pool_soa.h"
 #include "starforge_emitter.h"
 #include "starforge_backend.h"
 #include "starforge_backend_aos.h"
@@ -15,21 +16,23 @@ StarforgeParticleSystem* starforge_particlesystem_create(
     StarforgeParticleSystem* sys =
         (StarforgeParticleSystem*)malloc(sizeof(StarforgeParticleSystem));
 
-    sys->particles_pool = starforge_particle_pool_aos_create(max_particles);
     sys->pool = pool;
     sys->max_particles = max_particles;
     sys->emitter = NULL;
 
     switch (backend_type)
     {
-        case STARFORGE_BACKEND_SOA:
-            sys->backend = starforge_backend_aos_create(sys);
-            break;
         case STARFORGE_BACKEND_AOS:
+            sys->backend = starforge_backend_aos_create(sys);
+            sys->particles_pool = starforge_particle_pool_aos_create(max_particles);
+            break;
+        case STARFORGE_BACKEND_SOA:
             sys->backend = starforge_backend_soa_cpu_create(sys);
+            sys->particles_pool = starforge_particle_pool_soa_create(max_particles);
             break;
         case STARFORGE_BACKEND_AVX2:
             sys->backend = starforge_backend_soa_avx2_create(sys);
+            sys->particles_pool = starforge_particle_pool_soa_create(max_particles);
             break;
     }
 

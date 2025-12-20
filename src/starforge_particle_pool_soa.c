@@ -1,5 +1,21 @@
 #include "starforge_particle_pool_soa.h"
 
+typedef struct StarforgeParticlePool
+{
+    float* x;
+    float* y;
+    float* vx;
+    float* vy;
+    float* life;
+    float* max_life;
+    float* size;
+    StarforgeParticleType* type;
+    int* alive;
+
+    StarforgeParticlePoolAccessor* accessor;
+    int max_particles;
+} StarforgeParticlePool;
+
 static float soa_get_x(StarforgeParticlePool* pool, int index)
 {
     return pool->x[index];
@@ -61,14 +77,14 @@ StarforgeParticlePool* starforge_particle_pool_soa_create(int max_particles)
 {
     StarforgeParticlePool* pool = (StarforgeParticlePool*)malloc(sizeof(StarforgeParticlePool));
 
-    pool->x        = calloc(max_particles, sizeof(float));
-    pool->y        = calloc(max_particles, sizeof(float));
-    pool->vx       = calloc(max_particles, sizeof(float));
-    pool->vy       = calloc(max_particles, sizeof(float));
-    pool->life     = calloc(max_particles, sizeof(float));
-    pool->max_life = calloc(max_particles, sizeof(float));
-    pool->type     = calloc(max_particles, sizeof(StarforgeParticleType));
-    pool->alive    = calloc(max_particles, sizeof(int));
+    pool->x        = (float*)calloc(max_particles, sizeof(float));
+    pool->y        = (float*)calloc(max_particles, sizeof(float));
+    pool->vx       = (float*)calloc(max_particles, sizeof(float));
+    pool->vy       = (float*)calloc(max_particles, sizeof(float));
+    pool->life     = (float*)calloc(max_particles, sizeof(float));
+    pool->max_life = (float*)calloc(max_particles, sizeof(float));
+    pool->type     = (StarforgeParticleType*)calloc(max_particles, sizeof(StarforgeParticleType));
+    pool->alive    = (int*)calloc(max_particles, sizeof(int));
 
     pool->accessor = &soa_accessor;
     pool->max_particles = max_particles;
@@ -81,7 +97,7 @@ StarforgeParticlePoolAccessor* starforge_particle_pool_accessor_get(StarforgePar
     return pool->accessor;
 }
 
-void starforge_particle_pool_aos_destroy(StarforgeParticlePool* pool)
+void starforge_particle_pool_soa_destroy(StarforgeParticlePool* pool)
 {
     free(pool->x);
     free(pool->y);

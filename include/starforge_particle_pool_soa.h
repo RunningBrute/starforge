@@ -9,22 +9,6 @@
 extern "C" {
 #endif
 
-typedef struct StarforgeParticlePool
-{
-    float* x;
-    float* y;
-    float* vx;
-    float* vy;
-    float* life;
-    float* max_life;
-    float* size;
-    StarforgeParticleType* type;
-    int* alive;
-
-    StarforgeParticlePoolAccessor* accessor;
-    int max_particles;
-};
-
 StarforgeParticlePool* starforge_particle_pool_soa_create(int max_particles);
 
 StarforgeParticlePoolAccessor* starforge_particle_pool_accessor_get(StarforgeParticlePool* pool);

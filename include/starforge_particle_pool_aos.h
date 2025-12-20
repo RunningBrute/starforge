@@ -10,13 +10,6 @@
 extern "C" {
 #endif
 
-typedef struct StarforgeParticlePool
-{
-    StarforgeParticle* pool;
-    StarforgeParticlePoolAccessor* accessor;
-    int max_particles;
-};
-
 StarforgeParticlePool* starforge_particle_pool_aos_create(int max_particles);
 
 StarforgeParticlePoolAccessor* starforge_particle_pool_accessor_aos_get(StarforgeParticlePool* pool);
