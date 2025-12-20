@@ -77,6 +77,5 @@ StarforgeParticlePoolAccessor* starforge_particle_pool_accessor_aos_get(Starforg
 void starforge_particle_pool_aos_destroy(StarforgeParticlePool* pool)
 {
     free(pool->pool);
-    free(pool->accessor);
     free(pool);
 }
