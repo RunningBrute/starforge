@@ -1,62 +1,82 @@
 #include "starforge_particle_pool_aos.h"
+#include "starforge_particle_pool_accessor.h"
+
+static float aos_get_x(StarforgeParticlePool* pool, int index)
+{
+    return pool->pool[index].x;
+}
+
+static float aos_get_y(StarforgeParticlePool* pool, int index)
+{
+    return pool->pool[index].y;
+}
+
+static float aos_get_vx(StarforgeParticlePool* pool, int index)
+{
+    return pool->pool[index].vx;
+}
+
+static float aos_get_vy(StarforgeParticlePool* pool, int index)
+{
+    return pool->pool[index].vy;
+}
+
+static float aos_get_life(StarforgeParticlePool* pool, int index)
+{
+    return pool->pool[index].life;
+}
+
+static float aos_get_max_life(StarforgeParticlePool* pool, int index)
+{
+    return pool->pool[index].max_life;
+}
+
+static float aos_get_size(StarforgeParticlePool* pool, int index)
+{
+    return pool->pool[index].size;
+}
+
+static StarforgeParticleType aos_get_type(StarforgeParticlePool* pool, int index)
+{
+    return pool->pool[index].type;
+}
+
+static int aos_get_alive(StarforgeParticlePool* pool, int index)
+{
+    return pool->pool[index].alive;
+}
+
+struct StarforgeParticlePoolAccessor aos_accessor = {
+    .x = aos_get_x,
+    .y = aos_get_y,
+    .vx = aos_get_vx,
+    .vy = aos_get_vy,
+    .life = aos_get_life,
+    .max_life = aos_get_max_life,
+    .size = aos_get_size,
+    .type = aos_get_type,
+    .alive = aos_get_alive
+};
 
 StarforgeParticlePool* starforge_particle_pool_aos_create(int max_particles)
 {
     StarforgeParticlePool* pool = (StarforgeParticlePool*)malloc(sizeof(StarforgeParticlePool));
 
     pool->pool = (StarforgeParticle*)malloc(sizeof(StarforgeParticle));
+    pool->accessor = &aos_accessor;
     pool->max_particles = max_particles;
     
     return pool;
 }
 
-float get_x(StarforgeParticlePool* pool, int index)
+StarforgeParticlePoolAccessor* starforge_particle_pool_accessor_aos_get(StarforgeParticlePool* pool)
 {
-    return pool->pool[index].x;
-}
-
-float get_y(StarforgeParticlePool* pool, int index)
-{
-    return pool->pool[index].y;
-}
-
-float get_vx(StarforgeParticlePool* pool, int index)
-{
-    return pool->pool[index].vx;
-}
-
-float get_vy(StarforgeParticlePool* pool, int index)
-{
-    return pool->pool[index].vy;
-}
-
-float get_life(StarforgeParticlePool* pool, int index)
-{
-    return pool->pool[index].life;
-}
-
-float get_max_life(StarforgeParticlePool* pool, int index)
-{
-    return pool->pool[index].max_life;
-}
-
-float get_size(StarforgeParticlePool* pool, int index)
-{
-    return pool->pool[index].size;
-}
-
-StarforgeParticleType get_type(StarforgeParticlePool* pool, int index)
-{
-    return pool->pool[index].type;
-}
-
-int get_alive(StarforgeParticlePool* pool, int index)
-{
-    return pool->pool[index].alive;
+    return pool->accessor;
 }
 
 void starforge_particle_pool_aos_destroy(StarforgeParticlePool* pool)
 {
     free(pool->pool);
+    free(pool->accessor);
     free(pool);
 }
