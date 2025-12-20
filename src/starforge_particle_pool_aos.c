@@ -46,7 +46,7 @@ static int aos_get_alive(StarforgeParticlePool* pool, int index)
     return pool->pool[index].alive;
 }
 
-struct StarforgeParticlePoolAccessor aos_accessor = {
+static struct StarforgeParticlePoolAccessor aos_accessor = {
     .x = aos_get_x,
     .y = aos_get_y,
     .vx = aos_get_vx,

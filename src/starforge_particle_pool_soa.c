@@ -45,7 +45,7 @@ static int soa_get_alive(StarforgeParticlePool* pool, int index)
     return pool->alive[index];
 }
 
-struct StarforgeParticlePoolAccessor soa_accessor = {
+static struct StarforgeParticlePoolAccessor soa_accessor = {
     .x = soa_get_x,
     .y = soa_get_y,
     .vx = soa_get_vx,
