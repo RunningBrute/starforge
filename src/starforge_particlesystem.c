@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include "starforge_particlesystem.h"
-#include "starforge_particle_pool_aos.h"
-#include "starforge_particle_pool_soa.h"
+#include "starforge_particle_pool.h"
 #include "starforge_emitter.h"
 #include "starforge_backend.h"
 #include "starforge_backend_aos.h"

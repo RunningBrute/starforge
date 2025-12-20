@@ -2,7 +2,7 @@
 #define STARFORGE_BACKEND_H
 
 #include "starforge_backend.h"
-#include "starforge_particle.h"
+#include "starforge_particle_pool_accessor.h"
 #include "starforge_world.h"
 
 #ifdef __cplusplus
@@ -13,7 +13,7 @@ typedef struct StarforgeBackend StarforgeBackend;
 
 typedef struct
 {
-    const StarforgeParticle* particles;
+    const StarforgeParticlePoolAccessor* particles;
     int count;
 } StarforgeParticleView;
 

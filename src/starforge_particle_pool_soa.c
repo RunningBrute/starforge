@@ -1,4 +1,4 @@
-#include "starforge_particle_pool_soa.h"
+#include "starforge_particle_pool.h"
 
 typedef struct StarforgeParticlePool
 {
@@ -90,11 +90,6 @@ StarforgeParticlePool* starforge_particle_pool_soa_create(int max_particles)
     pool->max_particles = max_particles;
 
     return pool;
-}
-
-StarforgeParticlePoolAccessor* starforge_particle_pool_accessor_get(StarforgeParticlePool* pool)
-{
-    return pool->accessor;
 }
 
 void starforge_particle_pool_soa_destroy(StarforgeParticlePool* pool)

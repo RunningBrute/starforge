@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include "starforge_particlesystem.h"
+#include "starforge_particle_pool.h"
 #include "starforge_backend_aos.h"
 #include "starforge_backend.h"
 #include "starforge_math.h"
@@ -16,6 +17,8 @@ static void backend_aos_update(
 {
     StarforgeBackendAosData* data = self->userdata;
     StarforgeParticleSystem* system = data->system;
+    StarforgeParticlePool* pool = system->particles_pool;
+    StarforgeParticlePoolAccessor* acessor = starforge_particle_pool_accessor_get(pool);
 
     for (int i = 0; i < system->max_particles; ++i)
     {

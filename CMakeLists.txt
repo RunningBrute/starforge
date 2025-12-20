@@ -32,6 +32,7 @@ add_library(starforge_core
     src/starforge_engine.c
     src/starforge_world.c
     src/starforge_particlesystem.c
+    src/starforge_particle_pool_common.c
     src/starforge_particle_pool_aos.c
     src/starforge_particle_pool_soa.c
 
