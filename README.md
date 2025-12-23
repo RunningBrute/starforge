@@ -1,6 +1,7 @@
 # StarForge
 
-Modular particle simulation engine written in pure C with pluggable emitters and frontends.
+Low-level, modular particle simulation engine written in pure C, focused on data-oriented design, memory layout optimization and performance benchmarking.
+Starforge is an experimental particle system designed to explore AoS vs SoA data layouts, SIMD-friendly update loops, while remaining portable and minimal.
 
 ## Live Demos (Raylib Frontend)
 
