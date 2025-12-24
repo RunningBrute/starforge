@@ -103,14 +103,6 @@ Burst / Explosion demo:
 - Compiler flags: `/O2 /arch:AVX2`
 - Benchmark framework: Google Benchmark
 
-### Results
-
-| Benchmark | Time [ms] | Speedup vs AoS |
-|---------|-----------|----------------|
-| AoS     | 5.66      | 1.0x           |
-| SoA     | 1.81      | 3.1x           |
-| AVX2    | 1.84      | 3.0x           |
-
 ### Running benchmarks
 
 ```bash
@@ -119,15 +111,26 @@ cmake --build build --config Release
 ./build/starforge_benchmark.exe
 ```
 
+### Results
+
+| Benchmark | Time [ms] | Speedup vs AoS |
+|---------|-----------|----------------|
+| AoS     | 5.66      | 1.0x           |
+| SoA     | 1.81      | 3.1x           |
+| AVX2    | 1.84      | 3.0x           |
+
 ---
 
 ## Project structure
 
-`include/`        - Engine API  
-`src/`            - Core engine, emitters and frontends  
-`demos/`          - Showcase applications  
-`tests/`         - Unit tests (Unity)  
-`build/`          - CMake build output  
+`assets/`     - Demo files
+`benchmarks/` - Google Benchmark tests
+`external/`   - external libs (Google Benchmark)
+`include/`    - Engine API  
+`src/`        - Core engine, emitters and frontends  
+`demos/`      - Showcase applications  
+`tests/`      - Unit tests (Unity)  
+`build/`      - CMake build output  
 
 ---
 
