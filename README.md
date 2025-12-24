@@ -89,6 +89,28 @@ Burst / Explosion demo:
 
 ## Benchmarks
 
+### Test environment
+
+- CPU: 16 cores @ 2.4 GHz
+- Cache:
+  - L1 Data: 32 KiB (per core)
+  - L1 Instruction: 32 KiB (per core)
+  - L2 Unified: 256 KiB (per core)
+  - L3 Unified: 16 MiB (shared)
+- OS: Windows 11 x64
+- Compiler: MSVC
+- Build type: Release
+- Compiler flags: `/O2 /arch:AVX2`
+- Benchmark framework: Google Benchmark
+
+### Results
+
+| Benchmark | Time [ms] | Speedup vs AoS |
+|---------|-----------|----------------|
+| AoS     | 5.66      | 1.0x           |
+| SoA     | 1.81      | 3.1x           |
+| AVX2    | 1.84      | 3.0x           |
+
 ### Running benchmarks
 
 ```bash
