@@ -87,7 +87,9 @@ Burst / Explosion demo:
 
 ---
 
-## Running benchmarks
+## Benchmarks
+
+### Running benchmarks
 
 ```bash
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
