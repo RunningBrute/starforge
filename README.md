@@ -87,6 +87,16 @@ Burst / Explosion demo:
 
 ---
 
+## Running benchmarks
+
+```bash
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build --config Release
+./build/starforge_benchmark.exe
+```
+
+---
+
 ## Project structure
 
 `include/`        - Engine API  
