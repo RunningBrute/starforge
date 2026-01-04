@@ -140,6 +140,7 @@ StarforgeParticlePool* starforge_particle_pool_soa_create(int max_particles)
     pool->vy       = (float*)calloc(max_particles, sizeof(float));
     pool->life     = (float*)calloc(max_particles, sizeof(float));
     pool->max_life = (float*)calloc(max_particles, sizeof(float));
+    pool->size     = (float*)calloc(max_particles, sizeof(float));
     pool->type     = (StarforgeParticleType*)calloc(max_particles, sizeof(StarforgeParticleType));
     pool->alive    = (int*)calloc(max_particles, sizeof(int));
 
