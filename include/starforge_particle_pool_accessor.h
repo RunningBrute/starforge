@@ -10,6 +10,7 @@ extern "C" {
 
 typedef struct StarforgeParticlePoolAccessor
 {
+    /* getters */
     float (*x)(void* pool, int index);
     float (*y)(void* pool, int index);
     float (*vx)(void* pool, int index);
@@ -19,6 +20,17 @@ typedef struct StarforgeParticlePoolAccessor
     float (*size)(void* pool, int index);
     StarforgeParticleType (*type)(void* pool, int index);
     int (*alive)(void* pool, int index);
+
+    /* setters */
+    void (*set_x)(void* pool, int index, float value);
+    void (*set_y)(void* pool, int index, float value);
+    void (*set_vx)(void* pool, int index, float value);
+    void (*set_vy)(void* pool, int index, float value);
+    void (*set_life)(void* pool, int index, float value);
+    void (*set_max_life)(void* pool, int index, float value);
+    void (*set_size)(void* pool, int index, float value);
+    void (*set_type)(void* pool, int index, StarforgeParticleType value);
+    void (*set_alive)(void* pool, int index, int value);
 } StarforgeParticlePoolAccessor;
 
 #ifdef __cplusplus
