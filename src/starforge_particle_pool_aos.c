@@ -125,7 +125,9 @@ StarforgeParticlePool* starforge_particle_pool_aos_create(int max_particles)
 {
     StarforgeParticlePool* pool = (StarforgeParticlePool*)malloc(sizeof(StarforgeParticlePool));
 
-    pool->pool = (StarforgeParticle*)malloc(sizeof(StarforgeParticle));
+    pool->pool = (StarforgeParticle*)malloc(
+        sizeof(StarforgeParticle) * max_particles
+    );
     pool->accessor = &aos_accessor;
     pool->max_particles = max_particles;
 
