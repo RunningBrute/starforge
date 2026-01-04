@@ -61,7 +61,53 @@ static int soa_get_alive(StarforgeParticlePool* pool, int index)
     return pool->alive[index];
 }
 
-static struct StarforgeParticlePoolAccessor soa_accessor = {
+static void soa_set_x(StarforgeParticlePool* pool, int index, float value)
+{
+    pool->x[index] = value;
+}
+
+static void soa_set_y(StarforgeParticlePool* pool, int index, float value)
+{
+    pool->y[index] = value;
+}
+
+static void soa_set_vx(StarforgeParticlePool* pool, int index, float value)
+{
+    pool->vx[index] = value;
+}
+
+static void soa_set_vy(StarforgeParticlePool* pool, int index, float value)
+{
+    pool->vy[index] = value;
+}
+
+static void soa_set_life(StarforgeParticlePool* pool, int index, float value)
+{
+    pool->life[index] = value;
+}
+
+static void soa_set_max_life(StarforgeParticlePool* pool, int index, float value)
+{
+    pool->max_life[index] = value;
+}
+
+static void soa_set_size(StarforgeParticlePool* pool, int index, float value)
+{
+    pool->size[index] = value;
+}
+
+static void soa_set_type(StarforgeParticlePool* pool, int index, StarforgeParticleType value)
+{
+    pool->type[index] = value;
+}
+
+static void soa_set_alive(StarforgeParticlePool* pool, int index, int value)
+{
+    pool->alive[index] = value;
+}
+
+static StarforgeParticlePoolAccessor soa_accessor = {
+    /* getters */
     .x = soa_get_x,
     .y = soa_get_y,
     .vx = soa_get_vx,
@@ -70,7 +116,18 @@ static struct StarforgeParticlePoolAccessor soa_accessor = {
     .max_life = soa_get_max_life,
     .size = soa_get_size,
     .type = soa_get_type,
-    .alive = soa_get_alive
+    .alive = soa_get_alive,
+
+    /* setters */
+    .set_x = soa_set_x,
+    .set_y = soa_set_y,
+    .set_vx = soa_set_vx,
+    .set_vy = soa_set_vy,
+    .set_life = soa_set_life,
+    .set_max_life = soa_set_max_life,
+    .set_size = soa_set_size,
+    .set_type = soa_set_type,
+    .set_alive = soa_set_alive
 };
 
 StarforgeParticlePool* starforge_particle_pool_soa_create(int max_particles)
