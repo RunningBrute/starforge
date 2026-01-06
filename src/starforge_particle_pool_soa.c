@@ -1,4 +1,5 @@
 #include "starforge_particle_pool.h"
+#include <stdlib.h>
 
 typedef struct StarforgeParticlePool
 {
