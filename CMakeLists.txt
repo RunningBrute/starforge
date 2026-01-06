@@ -1,28 +1,32 @@
 cmake_minimum_required(VERSION 3.16)
 project(starforge C CXX)
 option(STARFORGE_ENABLE_SIMD "Enable SIMD (AVX2) backend" ON)
+option(STARFORGE_USE_TERMUX "Use your phone for development" OFF)
 
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
 include(FetchContent)
-FetchContent_Declare(
-  googletest
-  URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
-)
-# For Windows: Prevent overriding the parent project's compiler/linker settings
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-FetchContent_MakeAvailable(googletest)
 
-set(RAYLIB_VERSION 5.5)
+if(NOT STARFORGE_USE_TERMUX)
+    FetchContent_Declare(
+      googletest
+      URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
+    )
+    # For Windows: Prevent overriding the parent project's compiler/linker settings
+    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+    FetchContent_MakeAvailable(googletest)
 
-FetchContent_Declare(
-    raylib
-    URL https://github.com/raysan5/raylib/archive/refs/tags/${RAYLIB_VERSION}.tar.gz
-    DOWNLOAD_EXTRACT_TIMESTAMP OFF
-)
+    set(RAYLIB_VERSION 5.5)
 
-FetchContent_MakeAvailable(raylib)
+    FetchContent_Declare(
+        raylib
+        URL https://github.com/raysan5/raylib/archive/refs/tags/${RAYLIB_VERSION}.tar.gz
+        DOWNLOAD_EXTRACT_TIMESTAMP OFF
+    )
+
+    FetchContent_MakeAvailable(raylib)
+endif()
 
 # ---------------------------------------
 # Core library (engine + world + systems)
@@ -90,14 +94,17 @@ target_link_libraries(starforge_frontend_ascii
 # ---------------------------------------
 # Raylib frontend
 # ---------------------------------------
-add_library(starforge_frontend_raylib
-    src/starforge_frontend_raylib.c
-)
 
-target_link_libraries(starforge_frontend_raylib
-    starforge_core
-    raylib
-)
+if(NOT STARFORGE_USE_TERMUX)
+    add_library(starforge_frontend_raylib
+        src/starforge_frontend_raylib.c
+    )
+
+    target_link_libraries(starforge_frontend_raylib
+        starforge_core
+        raylib
+    )
+endif()
 
 # ---------------------------------------
 # Main app
@@ -137,29 +144,31 @@ target_link_libraries(starforge_demo_burst
     starforge_frontend_ascii
 )
 
-# ---------------------------------------
-# Raylib rain demo
-# ---------------------------------------
-add_executable(starforge_demo_raylib_rain
-    demos/demo_raylib_rain.c
-)
+if(NOT STARFORGE_USE_TERMUX)
+    # ---------------------------------------
+    # Raylib rain demo
+    # ---------------------------------------
+    add_executable(starforge_demo_raylib_rain
+        demos/demo_raylib_rain.c
+    )
 
-target_link_libraries(starforge_demo_raylib_rain
-    starforge_core
-    starforge_frontend_raylib
-)
+    target_link_libraries(starforge_demo_raylib_rain
+        starforge_core
+        starforge_frontend_raylib
+    )
 
-# ---------------------------------------
-# Raylib fire demo
-# ---------------------------------------
-add_executable(starforge_demo_raylib_fire
-    demos/demo_raylib_fire.c
-)
+    # ---------------------------------------
+    # Raylib fire demo
+    # ---------------------------------------
+    add_executable(starforge_demo_raylib_fire
+        demos/demo_raylib_fire.c
+    )
 
-target_link_libraries(starforge_demo_raylib_fire
-    starforge_core
-    starforge_frontend_raylib
-)
+    target_link_libraries(starforge_demo_raylib_fire
+        starforge_core
+        starforge_frontend_raylib
+    )
+endif()
 
 target_compile_definitions(starforge_core PUBLIC
     $<$<BOOL:${STARFORGE_ENABLE_SIMD}>:STARFORGE_ENABLE_SIMD>
@@ -182,22 +191,25 @@ target_link_libraries(starforge_tests
 # ---------------------------------------
 # # Google Benchmark
 # ---------------------------------------
-add_subdirectory(external/benchmark)
+if(NOT STARFORGE_USE_TERMUX)
 
-add_executable(starforge_benchmark
-    benchmarks/benchmark_update.cpp
-)
+    add_subdirectory(external/benchmark)
 
-target_link_libraries(starforge_benchmark
-    PRIVATE
-    starforge_core
-    gtest_main
-    benchmark::benchmark
-)
+    add_executable(starforge_benchmark
+        benchmarks/benchmark_update.cpp
+    )
 
-set_target_properties(starforge_benchmark PROPERTIES
-    CXX_STANDARD 17
-    CXX_STANDARD_REQUIRED ON
-)
+    target_link_libraries(starforge_benchmark
+        PRIVATE
+        starforge_core
+        gtest_main
+        benchmark::benchmark
+    )
 
-include(GoogleTest)
+    set_target_properties(starforge_benchmark PROPERTIES
+        CXX_STANDARD 17
+        CXX_STANDARD_REQUIRED ON
+    )
+
+    include(GoogleTest)
+endif()
