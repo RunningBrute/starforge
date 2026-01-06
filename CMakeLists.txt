@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 project(starforge C CXX)
+option(STARFORGE_ENABLE_SIMD "Enable SIMD (AVX2) backend" ON)
 
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
@@ -27,8 +28,7 @@ FetchContent_MakeAvailable(raylib)
 # Core library (engine + world + systems)
 # ---------------------------------------
 
-add_library(starforge_core
-
+set(STARFORGE_CORE_SOURCES
     src/starforge_engine.c
     src/starforge_world.c
     src/starforge_particlesystem.c
@@ -38,11 +38,20 @@ add_library(starforge_core
 
     src/starforge_backend_aos.c
     src/starforge_backend_soa_cpu.c
-    src/starforge_backend_soa_avx2.c
 
     src/starforge_emitter_rain.c
     src/starforge_emitter_burst.c
     src/starforge_emitter_fire.c
+)
+
+if (STARFORGE_ENABLE_SIMD)
+    list(APPEND STARFORGE_CORE_SOURCES
+        src/starforge_backend_soa_avx2.c
+    )
+endif()
+
+add_library(starforge_core
+    ${STARFORGE_CORE_SOURCES}
 )
 
 target_include_directories(starforge_core PUBLIC
@@ -53,11 +62,17 @@ if(NOT WIN32)
     target_link_libraries(starforge_core m)
 endif()
 
-if (MSVC)
-    target_compile_options(starforge_core PRIVATE
-        $<$<CONFIG:Release>:/O2 /arch:AVX2 /fp:fast>)
-else()
-    target_compile_options(starforge_core PRIVATE -mavx2 -mfma)
+if (STARFORGE_ENABLE_SIMD AND
+    CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64|AMD64|i.86")
+    if (MSVC)
+        target_compile_options(starforge_core PRIVATE
+            $<$<CONFIG:Release>:/O2 /arch:AVX2 /fp:fast>
+        )
+    else()
+        target_compile_options(starforge_core PRIVATE
+            -mavx2 -mfma
+        )
+    endif()
 endif()
 
 # ---------------------------------------
@@ -144,6 +159,10 @@ add_executable(starforge_demo_raylib_fire
 target_link_libraries(starforge_demo_raylib_fire
     starforge_core
     starforge_frontend_raylib
+)
+
+target_compile_definitions(starforge_core PUBLIC
+    $<$<BOOL:${STARFORGE_ENABLE_SIMD}>:STARFORGE_ENABLE_SIMD>
 )
 
 # ---------------------------------------
