@@ -8,29 +8,31 @@
 extern "C" {
 #endif
 
+typedef struct StarforgeParticlePool StarforgeParticlePool;
+
 typedef struct StarforgeParticlePoolAccessor
 {
     /* getters */
-    float (*x)(void* pool, int index);
-    float (*y)(void* pool, int index);
-    float (*vx)(void* pool, int index);
-    float (*vy)(void* pool, int index);
-    float (*life)(void* pool, int index);
-    float (*max_life)(void* pool, int index);
-    float (*size)(void* pool, int index);
-    StarforgeParticleType (*type)(void* pool, int index);
-    int (*alive)(void* pool, int index);
+    float (*x)(StarforgeParticlePool* pool, int index);
+    float (*y)(StarforgeParticlePool* pool, int index);
+    float (*vx)(StarforgeParticlePool* pool, int index);
+    float (*vy)(StarforgeParticlePool* pool, int index);
+    float (*life)(StarforgeParticlePool* pool, int index);
+    float (*max_life)(StarforgeParticlePool* pool, int index);
+    float (*size)(StarforgeParticlePool* pool, int index);
+    StarforgeParticleType (*type)(StarforgeParticlePool* pool, int index);
+    int (*alive)(StarforgeParticlePool* pool, int index);
 
     /* setters */
-    void (*set_x)(void* pool, int index, float value);
-    void (*set_y)(void* pool, int index, float value);
-    void (*set_vx)(void* pool, int index, float value);
-    void (*set_vy)(void* pool, int index, float value);
-    void (*set_life)(void* pool, int index, float value);
-    void (*set_max_life)(void* pool, int index, float value);
-    void (*set_size)(void* pool, int index, float value);
-    void (*set_type)(void* pool, int index, StarforgeParticleType value);
-    void (*set_alive)(void* pool, int index, int value);
+    void (*set_x)(StarforgeParticlePool* pool, int index, float value);
+    void (*set_y)(StarforgeParticlePool* pool, int index, float value);
+    void (*set_vx)(StarforgeParticlePool* pool, int index, float value);
+    void (*set_vy)(StarforgeParticlePool* pool, int index, float value);
+    void (*set_life)(StarforgeParticlePool* pool, int index, float value);
+    void (*set_max_life)(StarforgeParticlePool* pool, int index, float value);
+    void (*set_size)(StarforgeParticlePool* pool, int index, float value);
+    void (*set_type)(StarforgeParticlePool* pool, int index, StarforgeParticleType value);
+    void (*set_alive)(StarforgeParticlePool* pool, int index, int value);
 } StarforgeParticlePoolAccessor;
 
 #ifdef __cplusplus

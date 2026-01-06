@@ -1,4 +1,5 @@
 #include "starforge_particle_pool.h"
+#include <stdlib.h>
 
 typedef struct StarforgeParticlePool
 {
@@ -99,7 +100,7 @@ static void aos_set_alive(StarforgeParticlePool* pool, int index, int value)
 
 static struct StarforgeParticlePoolAccessor aos_accessor = {
     /* getters */
-    .x = aos_get_x,
+    .x = &aos_get_x,
     .y = aos_get_y,
     .vx = aos_get_vx,
     .vy = aos_get_vy,
@@ -107,7 +108,7 @@ static struct StarforgeParticlePoolAccessor aos_accessor = {
     .max_life = aos_get_max_life,
     .size = aos_get_size,
     .type = aos_get_type,
-    .alive = aos_get_alive
+    .alive = aos_get_alive,
 
     /* setters */
     .set_x = aos_set_x,
