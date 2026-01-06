@@ -5,7 +5,9 @@
 #include "starforge_backend.h"
 #include "starforge_backend_aos.h"
 #include "starforge_backend_soa_cpu.h"
-#include "starforge_backend_soa_avx2.h"
+#if defined(STARFORGE_ENABLED_SIMD)
+    #include "starforge_backend_soa_avx2.h"
+#endif
 
 StarforgeParticleSystem* starforge_particlesystem_create(
     StarforgeParticle* pool,
@@ -29,8 +31,14 @@ StarforgeParticleSystem* starforge_particlesystem_create(
             sys->backend = starforge_backend_soa_cpu_create(sys);
             sys->particles_pool = starforge_particle_pool_soa_create(max_particles);
             break;
+#if defined(STARFORGE_ENABLED_SIMD)
         case STARFORGE_BACKEND_AVX2:
             sys->backend = starforge_backend_soa_avx2_create(sys);
+            sys->particles_pool = starforge_particle_pool_soa_create(max_particles);
+            break;
+#endif
+        default:
+            sys->backend = starforge_backend_soa_cpu_create(sys);
             sys->particles_pool = starforge_particle_pool_soa_create(max_particles);
             break;
     }
