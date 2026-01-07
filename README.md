@@ -93,9 +93,9 @@ cmake -DSTARFORGE_USE_TERMUX=ON ..
 ```
 
 This option:
--disables unsupported compiler flags and platform-specific assumptions
--ensures compatibility with the Termux toolchain
--allows development and testing directly on Android devices
+- disables unsupported compiler flags and platform-specific assumptions
+- ensures compatibility with the Termux toolchain
+- allows development and testing directly on Android devices
 
 By default, Termux support is disabled.
 
