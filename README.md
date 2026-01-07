@@ -76,6 +76,22 @@ SIMD backends are optional and disabled automatically on unsupported architectur
 cmake -DSTARFORGE_ENABLE_SIMD=ON ..
 ```
 
+To disable SIMD explicitly:
+
+```
+cmake -DSTARFORGE_ENABLE_SIMD=OFF ..
+```
+
+When disabled, Starforge falls back to the portable CPU backend.
+
+#### Termux / Android build
+
+Starforge can be built and run on Termux (Android) using a dedicated compatibility mode.
+
+```
+cmake -DSTARFORGE_USE_TERMUX=ON ..
+```
+
 ---
 
 ## Run demos
