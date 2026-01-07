@@ -92,6 +92,13 @@ Starforge can be built and run on Termux (Android) using a dedicated compatibili
 cmake -DSTARFORGE_USE_TERMUX=ON ..
 ```
 
+This option:
+-disables unsupported compiler flags and platform-specific assumptions
+-ensures compatibility with the Termux toolchain
+-allows development and testing directly on Android devices
+
+By default, Termux support is disabled.
+
 ---
 
 ## Run demos
@@ -158,11 +165,5 @@ cmake --build build --config Release
 `demos/`      - Showcase applications  
 `tests/`      - Unit tests (Unity)  
 `build/`      - CMake build output  
-
----
-
-## Termux support
-
-StarForge builds and runs directly on Android using Termux with Clang and CMake.
 
 ---
