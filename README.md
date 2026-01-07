@@ -65,6 +65,17 @@ cmake -G Ninja ..
 ninja
 ```
 
+### Build configuration options
+
+Starforge supports multiple build-time configuration options to adapt to different platforms and performance requirements.
+
+#### SIMD support (AVX2)
+SIMD backends are optional and disabled automatically on unsupported architectures (e.g. ARM).
+
+```
+cmake -DSTARFORGE_ENABLE_SIMD=ON ..
+```
+
 ---
 
 ## Run demos
