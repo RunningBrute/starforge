@@ -123,7 +123,16 @@ Burst / Explosion demo:
 
 ## Benchmarks
 
-### Test environment
+Starforge benchmarks compare different data layouts and backends using **identical workloads** across platforms.  
+The goal is to evaluate the impact of **data-oriented design (AoS vs SoA)** and **SIMD** on real hardware.
+
+Benchmarks are implemented using **Google Benchmark** and measure the average time per update.
+
+---
+
+### Test environments
+
+#### Desktop (x86_64)
 
 - CPU: 16 cores @ 2.4 GHz
 - Cache:
@@ -135,23 +144,42 @@ Burst / Explosion demo:
 - Compiler: MSVC
 - Build type: Release
 - Compiler flags: `/O2 /arch:AVX2`
-- Benchmark framework: Google Benchmark
+- SIMD: AVX2 enabled
 
-### Running benchmarks
+#### Mobile (ARM / Termux)
 
-```bash
-cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
-cmake --build build --config Release
-./build/starforge_benchmark.exe
-```
+- Device: Motorola Edge
+- CPU: 8 × 2.2 GHz
+- OS: Android (Termux)
+- Compiler: Clang
+- Build type: Release
+- SIMD: disabled
 
-### Results
+---
 
-| Benchmark | Time [ms] | Speedup vs AoS |
-|---------|-----------|----------------|
-| AoS     | 5.66      | 1.0x           |
-| SoA     | 1.81      | 3.1x           |
-| AVX2    | 1.84      | 3.0x           |
+### Results — Desktop (Windows)
+
+| Backend        | Time [ms] | Speedup vs AoS |
+|----------------|-----------|----------------|
+| AoS            | 5.66      | 1.0×           |
+| SoA            | **1.81**  | **3.1×**       |
+| SoA + AVX2     | 1.84      | 3.0×           |
+
+---
+
+### Results — Mobile (Termux / Android)
+
+| Backend | Time [ms] | Speedup vs AoS |
+|--------|-----------|----------------|
+| AoS    | 4.72      | 1.0×           |
+| SoA    | **1.37**  | **3.4×**       |
+
+---
+
+### Notes
+
+- Benchmarks measure **average time per iteration**, not total runtime.
+- All benchmarks use the same workload and update logic across platforms.
 
 ---
 
