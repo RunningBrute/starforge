@@ -191,25 +191,22 @@ target_link_libraries(starforge_tests
 # ---------------------------------------
 # # Google Benchmark
 # ---------------------------------------
-if(NOT STARFORGE_USE_TERMUX)
+add_subdirectory(external/benchmark)
 
-    add_subdirectory(external/benchmark)
+add_executable(starforge_benchmark
+    benchmarks/benchmark_update.cpp
+)
 
-    add_executable(starforge_benchmark
-        benchmarks/benchmark_update.cpp
-    )
+target_link_libraries(starforge_benchmark
+    PRIVATE
+    starforge_core
+    gtest_main
+    benchmark::benchmark
+)
 
-    target_link_libraries(starforge_benchmark
-        PRIVATE
-        starforge_core
-        gtest_main
-        benchmark::benchmark
-    )
+set_target_properties(starforge_benchmark PROPERTIES
+    CXX_STANDARD 17
+    CXX_STANDARD_REQUIRED ON
+)
 
-    set_target_properties(starforge_benchmark PROPERTIES
-        CXX_STANDARD 17
-        CXX_STANDARD_REQUIRED ON
-    )
-
-    include(GoogleTest)
-endif()
+include(GoogleTest)
