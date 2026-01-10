@@ -59,6 +59,7 @@ static void benchmark_SoA(benchmark::State& state)
 }
 BENCHMARK(benchmark_SoA);
 
+#if defined(STARFORGE_ENABLED_SIMD)
 static void benchmark_AVX2(benchmark::State& state)
 {
     static StarforgeParticle pool[MAX_PARTICLES];
@@ -84,5 +85,6 @@ static void benchmark_AVX2(benchmark::State& state)
     starforge_engine_destroy(engine);
 }
 BENCHMARK(benchmark_AVX2);
+#endif
 
 BENCHMARK_MAIN();
