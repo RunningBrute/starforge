@@ -11,10 +11,10 @@ static void benchmark_AoS(benchmark::State& state)
 {
     static StarforgeParticle pool[MAX_PARTICLES];
     StarforgeEngine* engine = starforge_engine_create(pool, MAX_PARTICLES, MAX_SYSTEMS);
-    
+
     StarforgeWorldForces* world = starforge_engine_world(engine);
     starforge_world_set_wind(world, 3.0f, 0.0f);
-    
+
     StarforgeParticleSystem* system =
         starforge_engine_create_system(engine, BackendType::STARFORGE_BACKEND_AOS);
 
@@ -37,10 +37,10 @@ static void benchmark_SoA(benchmark::State& state)
 {
     static StarforgeParticle pool[MAX_PARTICLES];
     StarforgeEngine* engine = starforge_engine_create(pool, MAX_PARTICLES, MAX_SYSTEMS);
-    
+
     StarforgeWorldForces* world = starforge_engine_world(engine);
     starforge_world_set_wind(world, 3.0f, 0.0f);
-    
+
     StarforgeParticleSystem* system =
         starforge_engine_create_system(engine, BackendType::STARFORGE_BACKEND_SOA);
 
@@ -64,10 +64,10 @@ static void benchmark_AVX2(benchmark::State& state)
 {
     static StarforgeParticle pool[MAX_PARTICLES];
     StarforgeEngine* engine = starforge_engine_create(pool, MAX_PARTICLES, MAX_SYSTEMS);
-    
+
     StarforgeWorldForces* world = starforge_engine_world(engine);
     starforge_world_set_wind(world, 3.0f, 0.0f);
-    
+
     StarforgeParticleSystem* system =
         starforge_engine_create_system(engine, BackendType::STARFORGE_BACKEND_AVX2);
 
