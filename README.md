@@ -194,5 +194,4 @@ starforge/
 ├─ include/                # Public API headers for the particle engine
 ├─ src/                    # Core engine implementation (emitters, update loops, frontends)
 ├─ tests/                  # Unit tests 
-
----
+```
