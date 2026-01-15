@@ -183,15 +183,16 @@ Benchmarks are implemented using **Google Benchmark** and measure the average ti
 
 ---
 
-## Project structure
+## Repository Structure
 
-`assets/`     - Demo files
-`benchmarks/` - Google Benchmark tests
-`external/`   - external libs (Google Benchmark)
-`include/`    - Engine API  
-`src/`        - Core engine, emitters and frontends  
-`demos/`      - Showcase applications  
-`tests/`      - Unit tests (Unity)  
-`build/`      - CMake build output  
+```text
+starforge/
+├─ assets/                 # Demo assets
+├─ benchmarks/             # Performance tests using Google Benchmark
+├─ demos/                  # Example applications demonstrating engine features
+├─ external/               # Third-party dependencies
+├─ include/                # Public API headers for the particle engine
+├─ src/                    # Core engine implementation (emitters, update loops, frontends)
+├─ tests/                  # Unit tests 
 
 ---
